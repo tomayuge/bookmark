@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Bookmark;
+use App\Models\Book;
+use App\Models\Account;
+use App\Models\Review;
 
 class DbController extends Controller
 {
@@ -38,26 +40,37 @@ class DbController extends Controller
         return view('db.store',$data);
     }
 
-    //検索フォームのデータを取得し、該当する既存のデータを取得するアクションメソッド　妻谷
+    //検索フォームのデータを取得し、該当する既存のデータを取得するアクションメソッド
+    //複数キーワードにも対応
     public function search(Request $req)
     {
         $keyword = $req -> keyword;
-        $query = Book::query(); //Bookモデルのクエリビルダを開始
+        $query = Book::query() -> paginate(5); //Bookモデルのクエリビルダを開始、ページネーションを[5]で指定
         if(isset($keyword)){
             $array_words = preg_split( '/\s+/ui' , $keyword , -1 ,PREG_SPLIT_NO_EMPTY); //スペース区切りでキーワードを配列に格納
             foreach($array_words as $word){
                 $escape_word = addcslashes($word,'\\_%'); //エスケープ処理
-                $query = $query->where('book_name',$keyword)->orWhere('writer',$keyword)->orWhere('publisher',$keyword)->get();
+                $query = $query->where('book_name','LIKE',"%$keyword%")->orWhere('writer','LIKE',"%$keyword%")->orWhere('publisher','LIKE',"%$keyword%")->get();
             }
         }
 
-        //クエリビルダの結果を取得。複数カラムで重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
-        $result = $query -> distinct() -> get(); 
+        //クエリビルダの結果を取得。複数カラムで検索しているので重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
+        //distinctいるかはテストで確認
+        $records = $query -> distinct() -> get(); 
+        
+        //レビュー点数の平均点を出す
+        $score = $record -> review -> score / count($records);
+        
 
         $data=[
-            'records' => $result,
+            'records' => $records,
+            'score' => $score,
+            'count' => $result->count(),
             'keyword' => $keyword
         ];
-        return view('db.search');
+        return view('db.search',$data);
     }
+
+    //
+    
 }
