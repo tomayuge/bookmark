@@ -37,4 +37,27 @@ class DbController extends Controller
         ];
         return view('db.store',$data);
     }
+
+    //検索フォームのデータを取得し、該当する既存のデータを取得するアクションメソッド　妻谷
+    public function search(Request $req)
+    {
+        $keyword = $req -> keyword;
+        $query = Book::query(); //Bookモデルのクエリビルダを開始
+        if(isset($keyword)){
+            $array_words = preg_split( '/\s+/ui' , $keyword , -1 ,PREG_SPLIT_NO_EMPTY); //スペース区切りでキーワードを配列に格納
+            foreach($array_words as $word){
+                $escape_word = addcslashes($word,'\\_%'); //エスケープ処理
+                $query = $query->where('book_name',$keyword)->orWhere('writer',$keyword)->orWhere('publisher',$keyword)->get();
+            }
+        }
+
+        //クエリビルダの結果を取得。複数カラムで重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
+        $result = $query -> distinct() -> get(); 
+
+        $data=[
+            'records' => $result,
+            'keyword' => $keyword
+        ];
+        return view('db.search');
+    }
 }
