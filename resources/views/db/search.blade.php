@@ -23,4 +23,5 @@
         @endforeach
     </table>
     {{ $records->links() }} 
+    <a href="/">Topページに戻る</a>
 @endsection
