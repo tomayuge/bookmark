@@ -61,7 +61,6 @@ class DbController extends Controller
         //レビュー点数の平均点を出す
         $score = $record -> review -> score / count($records);
         
-
         $data=[
             'records' => $records,
             'score' => $score,
