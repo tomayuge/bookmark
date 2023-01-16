@@ -17,16 +17,29 @@ class DbController extends Controller
 
     public function confirm(Request $req)
     {
-        $isbn = $req -> isbn;
-        // $data-[
-        //     'record'=>
-        // ];
-        return view('db.insert');
+        $isbn = $req -> isbnSearch;
+        $gbUrl = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
+        $searchData = $gbUrl."{$isbn}";
+        //dd($searchData);
+        $result=file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:')
+        $json = file_get_contents($searchData);
+        $jdata = json_decode($json);
+        dd($jdata);
+        $items = $jdata->items;
+
+        //9784295007807すっきりわかるJava
+
+        dd($items);
+
+        $data = [
+            'items' => $items
+         ];
+        return view('db.insert',$data);
     }
 
     public function store(Request $req)
     {
-        //$bookmark = new Bookmark();
+        $book = new Book();
 
         //$bookmark->save();
         $data = [
@@ -45,26 +58,27 @@ class DbController extends Controller
     public function search(Request $req)
     {
         $keyword = $req -> keyword;
-        $query = Book::query() -> paginate(5); //Bookモデルのクエリビルダを開始、ページネーションを[5]で指定
+        $query = Book::query(); //Bookモデルのクエリビルダを開始、ページネーションを[5]で指定
         if(isset($keyword)){
             $array_words = preg_split( '/\s+/ui' , $keyword , -1 ,PREG_SPLIT_NO_EMPTY); //スペース区切りでキーワードを配列に格納
             foreach($array_words as $word){
                 $escape_word = addcslashes($word,'\\_%'); //エスケープ処理
-                $query = $query->where('book_name','LIKE',"%$keyword%")->orWhere('writer','LIKE',"%$keyword%")->orWhere('publisher','LIKE',"%$keyword%")->get();
+                $query = $query->Where('book_name','LIKE',"%$keyword%")->orWhere('writer','LIKE',"%$keyword%")->orWhere('publisher','LIKE',"%$keyword%")->get();
             }
         }
 
         //クエリビルダの結果を取得。複数カラムで検索しているので重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
         //distinctいるかはテストで確認
         $records = $query -> distinct() -> get(); 
+        $records -> paginate(5);  //※一旦5ページにしてます
         
         //レビュー点数の平均点を出す
-        $score = $record -> review -> score / count($records);
+        $score = $records -> review -> score / count($records);
         
         $data=[
             'records' => $records,
             'score' => $score,
-            'count' => $result->count(),
+            'count' => $records->count(),
             'keyword' => $keyword
         ];
         return view('db.search',$data);
