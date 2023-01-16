@@ -63,6 +63,7 @@ class DbController extends Controller
     //検索フォームのデータを取得し、該当する既存のデータを取得するアクションメソッド
     //複数キーワードにも対応
     public function search(Request $req)
+    
     {
         $keyword = $req -> keyword;
         $query = Book::query(); //Bookモデルのクエリビルダを開始、ページネーションを[5]で指定

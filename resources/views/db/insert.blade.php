@@ -2,7 +2,7 @@
 @section('title','Bookmark')
 @section('main')
 <h1>書籍の新規登録</h1>
-    <form action="/db/confirm" method="POST">
+    <form action="/db/confirm" method="post">
         @csrf
         ISBN<input type="text" name="isbnSearch" required>
         <input type="submit" value="検索">
@@ -19,7 +19,7 @@
             <th>価格</th>
             <th>画像</th>
         </tr>
-        @foreach($items as $item)
+        @foreach($json_decode['items'] as $item)
         <tr>
             <td>{{ $item->id }}</td>
             <td>{{ $item->title }}</td>
@@ -29,8 +29,8 @@
             <td>{{ $item->imageLinks }}</td>
         </tr>
         @endforeach
-    </table>
-    <form action="/db/store" method="POST">
+    </table> -->
+    <form action="/db/store" method="post">
     @csrf
         <input type="submit" value="実行">
     </form>
