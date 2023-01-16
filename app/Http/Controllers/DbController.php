@@ -87,16 +87,21 @@ class DbController extends Controller
     //ログイン処理
     public function login(Request $req)
     {
-        //$bookmark = new Bookmark();
-
-        //$bookmark->save();
+        //アカウント情報とパスでログイン処理
         $data = [
             'username' => $req->user_name,
             'pass' => $req->pass,
         ];
-        if(){
-        return view('',$data);
+        $name = account::find($req->user_name);
+        $pass = account::find($req->pass);
+        if($data->username === $name){
+            if($data->pass === $pass){
+                return view('db.index');
+            }else{
+                return view('db.login');
+            }
+        }else{
+            return view('db.login');
         }
-    }
-    
+    }   
 }
