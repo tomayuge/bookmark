@@ -70,6 +70,19 @@ class DbController extends Controller
         return view('db.search',$data);
     }
 
-    //
+    //ログイン処理
+    public function login(Request $req)
+    {
+        //$bookmark = new Bookmark();
+
+        //$bookmark->save();
+        $data = [
+            'username' => $req->user_name,
+            'pass' => $req->pass,
+        ];
+        if(){
+        return view('',$data);
+        }
+    }
     
 }
