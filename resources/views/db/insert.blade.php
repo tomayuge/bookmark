@@ -29,7 +29,7 @@
             <td>{{ $item->imageLinks }}</td>
         </tr>
         @endforeach
-    </table> -->
+    </table>
     <form action="/db/store" method="post">
     @csrf
         <input type="submit" value="実行">
