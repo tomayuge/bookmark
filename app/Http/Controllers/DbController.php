@@ -20,16 +20,16 @@ class DbController extends Controller
         $isbn = $req -> isbnSearch;
         $gbUrl = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
         $searchData = $gbUrl."{$isbn}";
-        //dd($searchData);
-        $result=file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:')
+        dd($searchData);
         $json = file_get_contents($searchData);
+        //dd($json);
         $jdata = json_decode($json);
-        dd($jdata);
+        //dd($jdata);
         $items = $jdata->items;
 
         //9784295007807すっきりわかるJava
 
-        dd($items);
+        //dd($items);
 
         $data = [
             'items' => $items
