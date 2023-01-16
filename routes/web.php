@@ -20,4 +20,4 @@ Route::get('/', function () {
 Route::get('/db/insert','DbController@insert');//新規登録用フォーム(ISBN)
 Route::post('/db/confirm','DbController@confirm');//新規登録用フォーム(確認)
 Route::post('/db/store','DbController@store');//新規登録
-Route::post('/db/search','DbController@search');
+Route::post('/db/search','DbController@search');//検索用
