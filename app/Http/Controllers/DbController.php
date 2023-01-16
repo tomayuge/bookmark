@@ -17,27 +17,40 @@ class DbController extends Controller
 
     public function confirm(Request $req)
     {
-        $isbn = $req -> isbn;
-        // $data-[
-        //     'record'=>
-        // ];
-        return view('db.insert');
+        $isbn = $req -> isbnSearch;
+        $gbUrl = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
+        $searchData = $gbUrl."{$isbn}";
+        //dd($searchData);
+        $json=file_get_contents($searchData);
+        //dd($json);
+        $jdata = json_decode($json,true);
+        dd($jdata);
+        $items = $jdata->items;
+
+        //9784295007807すっきりわかるJava
+
+        dd($items);
+
+        // $data = [
+        //     'items' => $items
+        //  ];
+        // return view('db.insert',$data);
     }
 
     public function store(Request $req)
     {
-        //$bookmark = new Bookmark();
+        // $book = new Book();
 
-        //$bookmark->save();
-        $data = [
-            'isbn' => $req->isbn,
-            'book_name' => $req->book_name,
-            'writer' => $req->writer,
-            'publisher' => $req->publisher,
-            'price' => $req->price,
-            'img' => $req->img
-        ];
-        return view('db.store',$data);
+        // //$bookmark->save();
+        // $data = [
+        //     'isbn' => $req->isbn,
+        //     'book_name' => $req->book_name,
+        //     'writer' => $req->writer,
+        //     'publisher' => $req->publisher,
+        //     'price' => $req->price,
+        //     'img' => $req->img
+        // ];
+        // return view('db.store',$data);
     }
 
     //検索フォームのデータを取得し、該当する既存のデータを取得するアクションメソッド
@@ -72,6 +85,24 @@ class DbController extends Controller
         return view('db.search',$data);
     }
 
-    //
-    
+    //ログイン処理
+    public function login(Request $req)
+    {
+        //アカウント情報とパスでログイン処理
+        $data = [
+            'username' => $req->user_name,
+            'pass' => $req->pass,
+        ];
+        $name = account::find($req->user_name);
+        $pass = account::find($req->pass);
+        if($data->username === $name){
+            if($data->pass === $pass){
+                return view('db.index');
+            }else{
+                return view('db.login');
+            }
+        }else{
+            return view('db.login');
+        }
+    }   
 }
