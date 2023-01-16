@@ -17,16 +17,29 @@ class DbController extends Controller
 
     public function confirm(Request $req)
     {
-        $isbn = $req -> isbn;
-        // $data-[
-        //     'record'=>
-        // ];
-        return view('db.insert');
+        $isbn = $req -> isbnSearch;
+        $gbUrl = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
+        $searchData = $gbUrl."{$isbn}";
+        //dd($searchData);
+        $result=file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:')
+        $json = file_get_contents($searchData);
+        $jdata = json_decode($json);
+        dd($jdata);
+        $items = $jdata->items;
+
+        //9784295007807すっきりわかるJava
+
+        dd($items);
+
+        $data = [
+            'items' => $items
+         ];
+        return view('db.insert',$data);
     }
 
     public function store(Request $req)
     {
-        //$bookmark = new Bookmark();
+        $book = new Book();
 
         //$bookmark->save();
         $data = [
