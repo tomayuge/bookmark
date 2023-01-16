@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Bookmark;
+use App\Models\Book;
+use App\Models\Account;
+use App\Models\Review;
 
 class DbController extends Controller
 {
@@ -15,16 +17,24 @@ class DbController extends Controller
 
     public function confirm(Request $req)
     {
-        $isbn = $req -> isbn;
-        // $data-[
-        //     'record'=>
-        // ];
-        return view('db.insert');
+        $isbn = $req -> isbnSearch;
+        $gbUrl = 'https://www.googleapis.com/books/v1/volumes?q=isbn';
+        $searchData = $gbUrl."{$isbn}";
+        $json = file_get_contents($searchData);
+        $jdata = json_decode($json);
+        $items = $jdata->items;
+
+        dd($items);
+
+        $data = [
+            'items' => $items
+         ];
+        return view('db.insert',$data);
     }
 
     public function store(Request $req)
     {
-        //$bookmark = new Bookmark();
+        $book = new Book();
 
         //$bookmark->save();
         $data = [
