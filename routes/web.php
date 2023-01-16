@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('index');
 });
 
 Route::get('/db/insert','DbController@insert');//新規登録用フォーム(ISBN)
