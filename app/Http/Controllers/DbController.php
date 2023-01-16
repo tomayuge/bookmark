@@ -84,6 +84,24 @@ class DbController extends Controller
         return view('db.search',$data);
     }
 
-    //
-    
+    //ログイン処理
+    public function login(Request $req)
+    {
+        //アカウント情報とパスでログイン処理
+        $data = [
+            'username' => $req->user_name,
+            'pass' => $req->pass,
+        ];
+        $name = account::find($req->user_name);
+        $pass = account::find($req->pass);
+        if($data->username === $name){
+            if($data->pass === $pass){
+                return view('db.index');
+            }else{
+                return view('db.login');
+            }
+        }else{
+            return view('db.login');
+        }
+    }   
 }
