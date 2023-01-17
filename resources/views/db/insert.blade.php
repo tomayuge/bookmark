@@ -28,7 +28,7 @@
             <label for="img" class="form_label">画像</label>
             <input type="text" class="form-control" id="img" name="img" required>
         </div>
-        <input type="submit" value="登録">
+        <input type="submit" value="確認">
     </form>
     <br>
     <a href="/">Topページに戻る</a>
