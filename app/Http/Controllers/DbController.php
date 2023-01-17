@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Account;
 use App\Models\Review;
+use GuzzleHttp\Client;
 
 class DbController extends Controller
 {
@@ -17,45 +18,61 @@ class DbController extends Controller
 
     public function confirm(Request $req)
     {
-        $isbn = $req -> isbnSearch;
-        $gbUrl = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
-        $searchData = $gbUrl."{$isbn}";
-        //dd($searchData);
-        $json = file_get_contents("$searchData");
-        //dd($json);
-        $jdata = json_decode($json,true);
-        dd($jdata);
-        //$items = $jdata->items;
+        // $client = new Client();
+        // $isbn = $req -> isbnSearch;
+        // $Url = 'https://api.openbd.jp/v1/get?isbn=';
+        // $searchData = $Url."{$isbn}";
+        // $response = $client->request("get",$searchData);
+        // $return = json_decode($response->getBody(),true);
+        // $return_summary = $return[0]['summary'];
+        // $return_title = $return_summary['title'];
+        // $return_author = $return_summary['author'];
 
-        //9784295007807すっきりわかるJava
+        // $data = [
+        //     'title' => $return_title,
+        //     'author' => $return_author,
+        //     'isbn' => $isbn
+        // ];
+        //  dd($data);
 
-        //dd($items);
+        $isbn=$req->isbn;
+        $book_name=$req->book_name;
+        $writer=$req->writer;
+        $publisher=$req->publisher;
+        $price=$req->price;
+        $img=$req->img;
 
-        $data = [
-            $jdata['isbn'],
-            $jdata['title'],
-            $jdata['authors'],
-            $jdata['publisher'],
-            $jdata['retailPrice'],
-            $jdata['imageLinks']
-         ];
-         dd($data);
-         return view('db.insert',$data);
+        $data=[
+            'isbn'=>$isbn,
+            'book_name'=>$book_name,
+            'writer'=>$writer,
+            'publisher'=>$publisher,
+            'price'=>$price,
+            'img'=>$img,
+        ];
+        
+         return view('db.confirm',$data);
          
     }
 
     public function store(Request $req)
     {
         $book = new Book();
+        $book->isbn = $req->isbn;
+        $book->book_name = $req->book_name;
+        $book->writer = $req->writer;
+        $book->publisher = $req->publisher;
+        $book->price = $req->price;
+        $book->img = $req->img;
+
+        $book->save();
+
 
         //$bookmark->save();
         $data = [
-            'isbn' => $req->isbn,
+            'id' => $req->id,
             'book_name' => $req->book_name,
-            'writer' => $req->writer,
-            'publisher' => $req->publisher,
-            'price' => $req->price,
-            'img' => $req->img
+            'writer' => $req->writer
         ];
         return view('db.store',$data);
     }
@@ -91,16 +108,18 @@ class DbController extends Controller
         return view('db.search',$data);
     }
 
-    //検索ページから詳細ページに飛ぶ
+    //searchページから詳細ページに飛ぶアクションメソッド
     public function bookView(Request $req)
     {
         //受け取った値が単体か配列か検証する
         $book = Book::find($req);
-        $reviews = $book -> review;
+        $reviews = $book -> review ->get();
+        $avgScore = $book -> review -> score / count($reviews);
         
         $data =[
             'record' => $book,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'avgScore' => $avgScore
         ];
         return view('db.bookView',$data);
     }

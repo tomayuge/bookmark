@@ -5,12 +5,17 @@
 <table>
     <tr><td rowspan="6">{{ $record -> img }}</td></tr>
     <tr><td>{{ $record -> book_name }}</td></tr>
-    <tr><td>{{ $record -> review -> score }}</td></tr>
+    <tr><td>{{ $avgScore }}</td></tr>
     <tr><td>{{ $record -> writer }}</td></tr>
     <tr><td>{{ $record -> publisher }}</td></tr>
     <tr><td>{{ $record -> price }}</td></tr>
+    <tr>
+        <!-- reviewページに飛ぶボタンを作る -->
+        <form action="/db/review"></form>
+    </tr>
 </table>    
-
+<hr>
+<p>Reviews</p>
 <table>
     @foreach($reviews as $review)
         <tr>
