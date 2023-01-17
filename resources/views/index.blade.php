@@ -2,12 +2,12 @@
 @section('title','Bookmark')
 @section('main')
     
-<!-- フッター -->
+<!-- フッター
    <footer class="text-center bg-dark text-white">
         <p class="py-3">bookmark</p>
-    </footer>
+    </footer> -->
     
-<h1>トップページ</h1>
+<!-- <h1>トップページ</h1> -->
     <form action="/db/search" method="post">
         @csrf
         <input type="text" name="keyword" required>
