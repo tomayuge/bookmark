@@ -80,7 +80,6 @@ class DbController extends Controller
     //検索フォームのデータを取得し、該当する既存のデータを取得するアクションメソッド
     //複数キーワードにも対応
     public function search(Request $req)
-    
     {
         $keyword = $req -> keyword;
         $query = Book::query(); //Bookモデルのクエリビルダを開始、ページネーションを[5]で指定
@@ -109,24 +108,36 @@ class DbController extends Controller
         return view('db.search',$data);
     }
 
+    //searchページから詳細ページに飛ぶアクションメソッド
+    public function bookView(Request $req)
+    {
+        //受け取った値が単体か配列か検証する
+        $book = Book::find($req);
+        $reviews = $book -> review ->get();
+        $avgScore = $book -> review -> score / count($reviews);
+        
+        $data =[
+            'record' => $book,
+            'reviews' => $reviews,
+            'avgScore' => $avgScore
+        ];
+        return view('db.bookView',$data);
+    }
+
     //ログイン処理
     public function login(Request $req)
     {
         //アカウント情報とパスでログイン処理
-        $data = [
-            'username' => $req->user_name,
-            'pass' => $req->pass,
-        ];
-        $name = account::find($req->user_name);
-        $pass = account::find($req->pass);
-        if($data->username === $name){
-            if($data->pass === $pass){
-                return view('db.index');
-            }else{
-                return view('db.login');
-            }
+            $username = $req->user_name;
+            $pass = $req->pass;
+
+        //$name = account::find($req->user_name);
+        //$pass = account::find($req->pass);
+        if(($username==='akamine'&&$pass==='pass')||($username==='yuge'&&$pass==='pass')||($username==='hosomi'&&$pass==='pass')||($username==='tsumatani'&&$pass==='pass')){
+            return view('index');
         }else{
-            return view('db.login');
+            return view('loginerror');
         }
+        
     }   
 }
