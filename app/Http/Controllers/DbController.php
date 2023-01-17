@@ -91,16 +91,18 @@ class DbController extends Controller
         return view('db.search',$data);
     }
 
-    //検索ページから詳細ページに飛ぶ
+    //searchページから詳細ページに飛ぶアクションメソッド
     public function bookView(Request $req)
     {
         //受け取った値が単体か配列か検証する
         $book = Book::find($req);
-        $reviews = $book -> review;
+        $reviews = $book -> review ->get();
+        $avgScore = $book -> review -> score / count($reviews);
         
         $data =[
             'record' => $book,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'avgScore' => $avgScore
         ];
         return view('db.bookView',$data);
     }
