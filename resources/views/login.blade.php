@@ -4,6 +4,7 @@
     <h1>ログインページ</h1>
     <br>
 
+
     <form action="/db/login" method="post">
     @csrf
     <p>ユーザー名<input type="text" id="user_name" name="user_name" required></p>

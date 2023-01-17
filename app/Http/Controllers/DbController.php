@@ -103,6 +103,8 @@ class DbController extends Controller
         //$pass = account::find($req->pass);
         if(($username==='akamine'&&$pass==='pass')||($username==='yuge'&&$pass==='pass')||($username==='hosomi'&&$pass==='pass')||($username==='tsumatani'&&$pass==='pass')){
             return view('index');
+        }else{
+            return view('loginerror');
         }
         
     }   
