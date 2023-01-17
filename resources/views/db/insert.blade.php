@@ -4,37 +4,32 @@
 <h1>書籍の新規登録</h1>
     <form action="/db/confirm" method="post">
         @csrf
-        ISBN<input type="text" name="isbnSearch" required>
-        <input type="submit" value="検索">
+        <div>
+            <label for="isbn" class="form_label">ISBN</label>
+            <input type="text" class="form-control" id="isbn" name="isbn" required>
+        </div>
+        <div>
+            <label for="book_name" class="form_label">書籍名</label>
+            <input type="text" class="form-control" id="book_name" name="book_name" required>
+        </div>
+        <div>
+            <label for="writer" class="form_label">著者名</label>
+            <input type="text" class="form-control" id="writer" name="writer" required>
+        </div>
+        <div>
+            <label for="publisher" class="form_label">出版社名</label>
+            <input type="text" class="form-control" id="publisher" name="publisher" required>
+        </div>
+        <div>
+            <label for="price" class="form_label">価格</label>
+            <input type="text" class="form-control" id="price" name="price" required>
+        </div>
+        <div>
+            <label for="img" class="form_label">画像</label>
+            <input type="text" class="form-control" id="img" name="img" required>
+        </div>
+        <input type="submit" value="登録">
     </form>
-    <hr>
-    @isset($record)
-    <p>検索結果</p>
-    <table class="table">
-        <tr>
-            <th>ISBN</th>
-            <th>書籍名</th>
-            <th>著者名</th>
-            <th>出版社名</th>
-            <th>価格</th>
-            <th>画像</th>
-        </tr>
-        @foreach($json_decode['items'] as $item)
-        <tr>
-            <td>{{ $item->id }}</td>
-            <td>{{ $item->title }}</td>
-            <td>{{ $item->authors }}</td>
-            <td>{{ $item->publisher }}</td>
-            <td>{{ $item->retailPrice }}</td>
-            <td>{{ $item->imageLinks }}</td>
-        </tr>
-        @endforeach
-    </table>
-    <form action="/db/store" method="post">
-    @csrf
-        <input type="submit" value="実行">
-    </form>
-    @endisset
     <br>
     <a href="/">Topページに戻る</a>
 @endsection
