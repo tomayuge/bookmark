@@ -16,8 +16,9 @@
 
     <table class="table">
         @foreach($records as $record)
-        <tr>{{ $record -> img }}</tr>
-        <tr>{{ $record -> book_name }}</tr>
+        <!-- 下記でデータの受け渡しができるか。recordだけで全てのデータを受け渡しできるか検証する -->
+        <tr><a href="{{route('/db/bookView',$record ->id)}}">{{ $record -> img }}</a></tr>
+        <tr><a href="{{route('/db/bookView',$record)}}">{{ $record -> book_name}}</a></tr>
         <tr>{{ $score }}</tr>
         <tr>{{ $record -> writer }}</tr>
         <tr>{{ $record -> publisher }}</tr>

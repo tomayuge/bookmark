@@ -63,7 +63,6 @@ class DbController extends Controller
     //検索フォームのデータを取得し、該当する既存のデータを取得するアクションメソッド
     //複数キーワードにも対応
     public function search(Request $req)
-    
     {
         $keyword = $req -> keyword;
         $query = Book::query(); //Bookモデルのクエリビルダを開始、ページネーションを[5]で指定
@@ -90,6 +89,20 @@ class DbController extends Controller
             'keyword' => $keyword
         ];
         return view('db.search',$data);
+    }
+
+    //検索ページから詳細ページに飛ぶ
+    public function bookView(Request $req)
+    {
+        //受け取った値が単体か配列か検証する
+        $book = Book::find($req);
+        $reviews = $book -> review;
+        
+        $data =[
+            'record' => $book,
+            'reviews' => $reviews
+        ];
+        return view('db.bookView',$data);
     }
 
     //ログイン処理
