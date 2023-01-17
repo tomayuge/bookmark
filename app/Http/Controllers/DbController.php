@@ -21,41 +21,49 @@ class DbController extends Controller
         $gbUrl = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
         $searchData = $gbUrl."{$isbn}";
         //dd($searchData);
-        $json=file_get_contents($searchData);
+        $json = file_get_contents("$searchData");
         //dd($json);
         $jdata = json_decode($json,true);
         dd($jdata);
-        $items = $jdata->items;
+        //$items = $jdata->items;
 
         //9784295007807すっきりわかるJava
 
-        dd($items);
+        //dd($items);
 
-        // $data = [
-        //     'items' => $items
-        //  ];
-        // return view('db.insert',$data);
+        $data = [
+            $jdata['isbn'],
+            $jdata['title'],
+            $jdata['authors'],
+            $jdata['publisher'],
+            $jdata['retailPrice'],
+            $jdata['imageLinks']
+         ];
+         dd($data);
+         return view('db.insert',$data);
+         
     }
 
     public function store(Request $req)
     {
-        // $book = new Book();
+        $book = new Book();
 
-        // //$bookmark->save();
-        // $data = [
-        //     'isbn' => $req->isbn,
-        //     'book_name' => $req->book_name,
-        //     'writer' => $req->writer,
-        //     'publisher' => $req->publisher,
-        //     'price' => $req->price,
-        //     'img' => $req->img
-        // ];
-        // return view('db.store',$data);
+        //$bookmark->save();
+        $data = [
+            'isbn' => $req->isbn,
+            'book_name' => $req->book_name,
+            'writer' => $req->writer,
+            'publisher' => $req->publisher,
+            'price' => $req->price,
+            'img' => $req->img
+        ];
+        return view('db.store',$data);
     }
 
     //検索フォームのデータを取得し、該当する既存のデータを取得するアクションメソッド
     //複数キーワードにも対応
     public function search(Request $req)
+    
     {
         $keyword = $req -> keyword;
         $query = Book::query(); //Bookモデルのクエリビルダを開始、ページネーションを[5]で指定
@@ -93,7 +101,7 @@ class DbController extends Controller
 
         //$name = account::find($req->user_name);
         //$pass = account::find($req->pass);
-        if(($username==='akamine'&&$pass==='pass')||($username==='yuge'&&$pass==='pass')){
+        if(($username==='akamine'&&$pass==='pass')||($username==='yuge'&&$pass==='pass')||($username==='hosomi'&&$pass==='pass')||($username==='tsumatani'&&$pass==='pass')){
             return view('index');
         }
         
