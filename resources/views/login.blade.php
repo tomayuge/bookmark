@@ -2,6 +2,11 @@
 @section('title','search')
 @section('main')
 <h2 class="text-center py-3">ログイン</h2>
+@if (session('err_msg'))
+<p class="text-danger">
+    {{ session('err_msg') }}
+@endif
+</p>
 <br>
 
 <!-- <style>

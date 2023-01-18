@@ -136,7 +136,9 @@ class DbController extends Controller
         if(($username==='akamine'&&$pass==='pass')||($username==='yuge'&&$pass==='pass')||($username==='hosomi'&&$pass==='pass')||($username==='tsumatani'&&$pass==='pass')){
             return view('index');
         }else{
-            return view('loginerror');
+            session()->flash('err_msg', '入力に誤りがあります。');
+            //\Session::flash('err_msg', '入力に誤りがあります。');
+            return redirect('/');
         }
         
     }   
