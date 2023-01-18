@@ -23,29 +23,32 @@ class DbController extends Controller
 
     public function confirm(Request $req)
     {
-        // $client = new Client();
-        // $isbn = $req -> isbnSearch;
-        // $Url = 'https://api.openbd.jp/v1/get?isbn=';
-        // $searchData = $Url."{$isbn}";
-        // $response = $client->request("get",$searchData);
-        // $return = json_decode($response->getBody(),true);
-        // $return_summary = $return[0]['summary'];
-        // $return_title = $return_summary['title'];
-        // $return_author = $return_summary['author'];
+        $isbn = $req -> isbnSearch;
+        //$Url = 'https://iss.ndl.go.jp/api/sru?operation=searchRetrieve&query=isbn=';
+        //$Url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
+        $Url = 'https://api.openbd.jp/v1/get?isbn=';
+        $searchData = $Url."{$isbn}";
 
-        // $data = [
-        //     'title' => $return_title,
-        //     'author' => $return_author,
-        //     'isbn' => $isbn
-        // ];
-        //  dd($data);
+       
+        $proxy = array(
+        "http" => array(
+        "proxy" => "tcp://172.16.71.20:3128",
+        "request_fulluri" => true
+        )
+        );
+        $proxy_context = stream_context_create($proxy);
+        $json = file_get_contents($searchData, false, $proxy_context);
+        $items = json_decode($json);
+        //$items = $jdata->items;
 
-        $isbn=$req->isbn;
-        $book_name=$req->book_name;
-        $writer=$req->writer;
-        $publisher=$req->publisher;
-        $price=$req->price;
-        $img=$req->img;
+        //dd($items);
+
+        $isbn=$items[0]->summary->isbn;
+        $book_name=$items[0]->summary->title;
+        $writer=$items[0]->summary->author;
+        $publisher=$items[0]->summary->publisher;
+        $price=$items[0]->onix->ProductSupply->SupplyDetail->Price[0]->PriceAmount;
+        $img=$items[0]->summary->cover;
 
         $data=[
             'isbn'=>$isbn,
@@ -55,13 +58,13 @@ class DbController extends Controller
             'price'=>$price,
             'img'=>$img,
         ];
-        
+        //dd($data);
          return view('db.confirm',$data);
-         
     }
 
     public function store(Request $req)
     {
+        //dd($req);
         $book = new Book();
         $book->isbn = $req->isbn;
         $book->book_name = $req->book_name;
@@ -72,12 +75,15 @@ class DbController extends Controller
 
         $book->save();
 
+        //dd($book);
 
-        //$bookmark->save();
         $data = [
-            'id' => $req->id,
+            'isbn' => $req->isbn,
             'book_name' => $req->book_name,
-            'writer' => $req->writer
+            'writer' => $req->writer,
+            'publisher'=> $req->publisher,
+            'price'=> $req->price,
+            'img'=> $req->img
         ];
         return view('db.store',$data);
     }
@@ -155,7 +161,7 @@ class DbController extends Controller
         //$name = account::find($req->user_name);
         //$pass = account::find($req->pass);
         if(($username==='akamine'&&$pass==='pass')||($username==='yuge'&&$pass==='pass')||($username==='hosomi'&&$pass==='pass')||($username==='tsumatani'&&$pass==='pass')){
-            return view('index');
+            return view('/db/index');
         }else{
             session()->flash('err_msg', '入力に誤りがあります。');
             //\Session::flash('err_msg', '入力に誤りがあります。');
