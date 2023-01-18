@@ -146,7 +146,7 @@ class DbController extends Controller
     {
         $data = [
             //全レコードを取得するモデル内のメソッドを実行し保存
-            'records' => Book::all()
+            'records' => Book::paginate(2)
         ];
         return view('db.list',$data);
     }
