@@ -149,9 +149,15 @@ class DbController extends Controller
     //全レコードを取得するモデル内のメソッドを実行
     public function list()
     {
+        $book = Book::paginate(2);
+        $score = $book -> review -> score;
+        if($score===null){
+            $score=0;
+        }
         $data = [
             //全レコードを取得するモデル内のメソッドを実行し保存
-            'records' => Book::paginate(2)
+            'records' => Book::paginate(2),
+            'score' => $score
         ];
         return view('db.list',$data);
     }
