@@ -14,9 +14,7 @@
 
     <table class="table">
         @foreach($records as $record)
-        <!-- 下記でデータの受け渡しができるか。recordだけで全てのデータを受け渡しできるか検証する -->
-        <!-- <tr><a href="{{route('/db/bookView',$record ->id)}}">{{ $record -> img }}</a></tr>
-        <tr><a href="{{route('/db/bookView',$record)}}">{{ $record -> book_name}}</a></tr> -->
+        
         <tr>
             <td>{{ $record -> img }}</td>
             <td>{{ $record -> book_name }}</td>
