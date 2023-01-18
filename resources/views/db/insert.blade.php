@@ -13,11 +13,12 @@
         
         <input type="text" name="isbnSearch" required>
         </div>
-        <input type="submit" value="検索" class="btn btn-outline-dark">
+        <br>
+        <center><input type="submit" value="登録" class="btn btn-outline-dark"></center>
 </div>
 <br><br>
 
-<div style="text-align:right">
+<div style="text-align:center">
 <a href="/db/index">Topページに戻る</a>
 </div>
 </form>
