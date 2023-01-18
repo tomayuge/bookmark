@@ -25,8 +25,8 @@
     @csrf
     <p>登録しますか？</p> 
     <input type="submit" value="登録">
+    <br>
+    <a href="/db/index">Topページに戻る</a>
     </form>
     
-    <br>
-    <a href="/">Topページに戻る</a>
 @endsection
