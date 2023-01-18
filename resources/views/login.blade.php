@@ -19,10 +19,10 @@
 <form class="needs-validation col-3 mx-auto" novalidate action="/db/login" method="post">
     @csrf
 
-    <div style="margin-left:35px">ユーザー名</div><br><center><input class="col-10 mb-10" type="text" id="user_name" name="user_name" required></center>
+    <div style="margin-left:40px">ユーザー名<br><input class="col-10 mb-10" type="text" id="user_name" name="user_name" required></div>
     <br>
 
-    <div style="margin-left:35px">パスワード</div><br><center><input class="col-10 mb-10" type="password" id="pass" name="pass" required></center>
+    <div style="margin-left:40px">パスワード<br><input class="col-10 mb-10" type="password" id="pass" name="pass" required></div>
     <br><center><input class="btn btn-info  w-45  " type="submit" value="送信"></center>
     <br>
 </form>
