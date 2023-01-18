@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Account;
 use App\Models\Review;
-use GuzzleHttp\Client;
 
 class DbController extends Controller
 {
+    //トップページ
     public function index()
     {
         return view('db.index');
@@ -21,15 +21,14 @@ class DbController extends Controller
         return view('db.insert');
     }
 
+    //確認ページ
     public function confirm(Request $req)
     {
         $isbn = $req -> isbnSearch;
-        //$Url = 'https://iss.ndl.go.jp/api/sru?operation=searchRetrieve&query=isbn=';
-        //$Url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
         $Url = 'https://api.openbd.jp/v1/get?isbn=';
         $searchData = $Url."{$isbn}";
-
        
+        //プロキシ設定
         $proxy = array(
         "http" => array(
         "proxy" => "tcp://172.16.71.20:3128",
@@ -39,10 +38,9 @@ class DbController extends Controller
         $proxy_context = stream_context_create($proxy);
         $json = file_get_contents($searchData, false, $proxy_context);
         $items = json_decode($json);
-        //$items = $jdata->items;
-
         //dd($items);
 
+        //openBDで取得したデータをdataに格納
         $isbn=$items[0]->summary->isbn;
         $book_name=$items[0]->summary->title;
         $writer=$items[0]->summary->author;
@@ -63,9 +61,9 @@ class DbController extends Controller
          return view('db.confirm',$data);
     }
 
+    //新規登録完了ページ
     public function store(Request $req)
     {
-        //dd($req);
         $book = new Book();
         $book->isbn = $req->isbn;
         $book->book_name = $req->book_name;
@@ -74,9 +72,8 @@ class DbController extends Controller
         $book->price = $req->price;
         $book->img = $req->img;
 
+        //Booksテーブルにデータを保存
         $book->save();
-
-        //dd($book);
 
         $data = [
             'isbn' => $req->isbn,
@@ -139,7 +136,7 @@ class DbController extends Controller
     //レビュー投稿
     public function review(Request $req)
     {
-
+        
     }
 
     //全レコードを取得するモデル内のメソッドを実行
