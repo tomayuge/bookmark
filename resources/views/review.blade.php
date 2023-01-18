@@ -2,6 +2,11 @@
 @section('title','search')
 @section('main')
     <h1>レビュー画面</h1>
+    @if (session('ok_msg'))
+<div style="text-align:center;" p class="text-danger" text-align:center>
+    {{ session('ok_msg') }}
+</div>
+@endif
     <br>
     <form action="/db/review" method="post">
     @csrf
@@ -14,9 +19,7 @@
     <p>名前
         <br><input type="text" id="account_id" name="account_id" required>
     </p>
-    <p>パスワード
-        <br><input type="password" id="pass" name="pass" required>
-    </p>
+    <input type="hidden" name="account_id" value={{ $account_id }} readonly>
     <input type="submit" value="登録"> 
     </form>
     <br><a href="/">戻る</a>

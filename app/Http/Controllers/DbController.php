@@ -140,7 +140,17 @@ class DbController extends Controller
     //レビュー投稿
     public function review(Request $req)
     {
-        
+        $review = new Review();
+        $review->book_id = $req -> id;
+        $review->score = $req->score;
+        $review->comment = $req->comment;
+        $review->account_id = $req->account_id;
+
+        //Booksテーブルにデータを保存
+        $review->save();
+
+        session()->flash('ok_msg', '登録しました。');
+        return view('db.review');
     }
 
     //全レコードを取得するモデル内のメソッドを実行
@@ -165,6 +175,7 @@ class DbController extends Controller
         //アカウント情報とパスでログイン処理
             $username = $req->user_name;
             $pass = $req->pass;
+            session()->put('account_id',$username);
 
         //$name = account::find($req->user_name);
         //$pass = account::find($req->pass);
