@@ -6,13 +6,11 @@
     <!-- searchページ内で再検索できるようにformを設置 検索ワードも引き継いでいる -->
     <form action="/db/search" method="post">
         @csrf
-        <input type="text" name="keyword" value="{{ $keyword }}">
+        <input type="text" name="keyword">
         <input type="submit" value="検索">
     </form>
 
     <hr>
-    
-    <p>[ {{ $keyword }} ]の検索結果 {{ $count }}件</p>
 
     <table class="table">
         @foreach($records as $record)

@@ -129,6 +129,22 @@ class DbController extends Controller
         return view('db.bookView',$data);
     }
 
+    //レビュー投稿
+    public function review(Request $req)
+    {
+
+    }
+
+    //全レコードを取得するモデル内のメソッドを実行
+    public function list()
+    {
+        $data = [
+            //全レコードを取得するモデル内のメソッドを実行し保存
+            'records' => Book::all()
+        ];
+        return view('db.list',$data);
+    }
+
     //ログイン処理
     public function login(Request $req)
     {

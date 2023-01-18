@@ -9,6 +9,6 @@
         <br><textarea rows="5" id="review" name="review" required></textarea>
     </p>
     <input type="submit" value="登録"> 
-    <br><a href="/">戻る</a>
     </form>
+    <br><a href="/">戻る</a>
 @endsection
