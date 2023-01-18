@@ -16,7 +16,7 @@
       margin: 10px;
       padding: 0;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
-      /* text-align: center; */
+      /* text-align: center;  */
 
     }
   </style>
