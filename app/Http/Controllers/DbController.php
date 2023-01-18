@@ -127,11 +127,15 @@ class DbController extends Controller
         $book = Book::find($req);
         $reviews = $book -> review ->get();
         $avgScore = $book -> review -> score / count($reviews);
-        
+        $score = $book -> review ->score->get();
+        if($score===null){
+            $score=0;
+        }
         $data =[
             'record' => $book,
             'reviews' => $reviews,
-            'avgScore' => $avgScore
+            'avgScore' => $avgScore,
+            'score' => $score
         ];
         return view('db.bookView',$data);
     }
