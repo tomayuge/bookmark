@@ -19,7 +19,13 @@
         <!-- 下記でデータの受け渡しができるか。recordだけで全てのデータを受け渡しできるか検証する -->
         <tr><a href="{{route('/db/bookView',$record ->id)}}">{{ $record -> img }}</a></tr>
         <tr><a href="{{route('/db/bookView',$record)}}">{{ $record -> book_name}}</a></tr>
-        <tr>{{ $score }}</tr>
+        <tr><div id="star">
+            <star-rating increment="0.5"
+                        >
+
+            </star-rating>
+            </div>{{ $score }}
+        </tr>
         <tr>{{ $record -> writer }}</tr>
         <tr>{{ $record -> publisher }}</tr>
         <tr>{{ $record -> ISBN }}</tr>
