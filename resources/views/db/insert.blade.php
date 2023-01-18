@@ -29,7 +29,8 @@
             <input type="text" class="form-control" id="img" name="img" required><br>
         </div><br>
         <input class="btn btn-info w-45" type="submit" value="確認">
+        <br>
+    <a href="/db/index">Topページに戻る</a>
     </form>
-    <br>
-    <a href="/">Topページに戻る</a>
+    
 @endsection

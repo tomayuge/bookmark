@@ -17,5 +17,5 @@
     <br>
     <a href="/db/bookView">書籍のページを見る</a>
     <a href="/db/insert">続けて新規登録する</a>
-    <a href="/">Topページに戻る</a>
+    <a href="/db/index">Topページに戻る</a>
 @endsection

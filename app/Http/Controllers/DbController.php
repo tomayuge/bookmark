@@ -10,6 +10,11 @@ use GuzzleHttp\Client;
 
 class DbController extends Controller
 {
+    public function index()
+    {
+        return view('db.index');
+    }
+
     //新規登録画面
     public function insert()
     {
