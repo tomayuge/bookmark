@@ -2,10 +2,14 @@
 @section('title','Bookmark')
 @section('main')
 <h2>書籍の新規登録</h2><br>
-    <form action="/db/confirm" method="get">
+    <form action="/db/confirm" method="post">
         @csrf
         ISBN<input type="text" name="isbnSearch" required>
         <input type="submit" value="検索">
+
+        <br>
+    <a href="/db/index">Topページに戻る</a>
+    </form>
 
         <!-- <div>
             <label for="isbn" class="form_label">ISBN</label>
@@ -32,9 +36,5 @@
             <input type="text" class="form-control" id="img" name="img" required><br>
         </div><br>
         <input class="btn btn-info w-45" type="submit" value="確認">
-        -->
-    <br>
-    <a href="/db/index">Topページに戻る</a>
-    </form>
-    
+-->
 @endsection
