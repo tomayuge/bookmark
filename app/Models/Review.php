@@ -9,8 +9,13 @@ class Review extends Model
 {
     use HasFactory;
 
-    public function review()
+    public function book()
     {
-        return $this->belongsTo(Review::class);
+        return $this->belongsTo(Book::class);
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
     }
 }
