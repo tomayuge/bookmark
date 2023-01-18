@@ -15,22 +15,22 @@
     <table class="table">
         @foreach($records as $record)
         <!-- 下記でデータの受け渡しができるか。recordだけで全てのデータを受け渡しできるか検証する -->
-        <tr><a href="{{route('/db/bookView',$record ->id)}}">{{ $record -> img }}</a></tr>
-        <tr><a href="{{route('/db/bookView',$record)}}">{{ $record -> book_name}}</a></tr>
-        <tr><div id="star">
+        <!-- <tr><a href="{{route('/db/bookView',$record ->id)}}">{{ $record -> img }}</a></tr>
+        <tr><a href="{{route('/db/bookView',$record)}}">{{ $record -> book_name}}</a></tr> -->
+        <tr><td><div id="star">
             <star-rating v-bind:increment="0.1"
-                         v-bind:star-points="{{}}"
                         >
 
             </star-rating>
-            </div>{{ $score }}
-        </tr>
-        <tr>{{ $record -> writer }}</tr>
-        <tr>{{ $record -> publisher }}</tr>
-        <tr>{{ $record -> ISBN }}</tr>
-        <tr>{{ $record -> price }}</tr>
+            </div>
+            </td></tr>
+        <tr><td>{{ $record -> writer }}</td></tr>
+        <tr><td>{{ $record -> publisher }}</td></tr>
+        <tr><td>{{ $record -> ISBN }}</td></tr>
+        <tr><td>{{ $record -> price }}</td></tr>
         @endforeach
     </table>
+    <br>
     {{ $records->links() }} 
     <a href="/">Topページに戻る</a>
 @endsection
