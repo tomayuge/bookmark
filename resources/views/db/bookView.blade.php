@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title','search')
 @section('main')
-<a href="/">Topページに戻る</a>
+<a href="/db/index">Topページに戻る</a>
 <table>
     <tr><td rowspan="6">{{ $record -> img }}</td></tr>
     <tr><td>{{ $record -> book_name }}</td></tr>
