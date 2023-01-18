@@ -58,6 +58,7 @@ class DbController extends Controller
             'price'=>$price,
             'img'=>$img,
         ];
+
         //dd($data);
          return view('db.confirm',$data);
     }
