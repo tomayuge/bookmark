@@ -1,7 +1,6 @@
 @extends('layouts.base')
 @section('title','search')
 @section('main')
-    <a href="/db/index">Topページに戻る</a>
     <form action="/db/search" method="post">
         @csrf
         <input type="text" name="keyword">
@@ -10,17 +9,29 @@
 
     <hr>
 
-    <table class="table">
+    <table class="table" border="1">
         @foreach($records as $record)
         
         <tr>
-            <td>{{ $record -> img }}</td>
-            <td><a href="/db/bookView">{{ $record -> book_name }}</a></td>
+            <td>
+                <!-- 画像と本の名前をbookViewへのリンクにしてます -->
+                <form action="/db/bookView" method="post">
+                <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
+                <input type="image" class="btn btn-link" src="{{ $record -> img }}" alt="詳細ページ" height="100">  
+                </form>
+            </td>
+            <td>
+                <form action="/db/bookView" method="post">
+                <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
+
+                <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
+                </form>
+            </td>
             <td>{{ $record -> reviews -> average('score') }}</td>
             <td>{{ $record -> writer }}</td>
             <td>{{ $record -> publisher }}</td>
             <td>{{ $record -> ISBN }}</td>
-            <td>{{ $record -> price }}</td>
+            <td>￥{{ $record -> price }}</td>
         </tr>
         @endforeach
     </table>

@@ -1,8 +1,6 @@
 @extends('layouts.base')
 @section('title','search')
 @section('main')
-    <a href="/">Topページに戻る</a>
-
     <!-- searchページ内で再検索できるようにformを設置 検索ワードも引き継いでいる -->
     <form action="/db/search" method="post">
         @csrf
