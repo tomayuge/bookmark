@@ -13,7 +13,7 @@
         @csrf
         <h2>Search</h2><br>
         <input type="text" name="keyword" required>
-        <input type="submit" value="検索" class="btn btn-outline-dark">
+        <input type="submit" value="検索" class="btn btn-info">
         <br>
         
     </form>
