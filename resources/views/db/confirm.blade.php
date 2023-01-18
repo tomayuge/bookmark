@@ -11,18 +11,20 @@
             <th>価格</th>
             <th>画像</th>
         </tr>
+        <form action="/db/store" method="post">
+        @csrf
         <tr>
-            <td>{{ $isbn }}</td>
-            <td>{{ $book_name }}</td>
-            <td>{{ $writer }}</td>
-            <td>{{ $publisher }}</td>
-            <td>{{ $price }}</td>
-            <td>{{ $img }}</td>
+            <td><input type="text" name="isbn" value="{{ $isbn }}" readonly></td>
+            <td><input type="text" name="book_name" value="{{ $book_name }}" readonly></td>
+            <td><input type="text" name="writer" value="{{ $writer }}" readonly></td>
+            <td><input type="text" name="publisher" value="{{ $publisher }}" readonly></td>
+            <td><input type="text" name="price" value="{{ $price }}" readonly></td>
+            <td><input type="text" name="img" value="{{ $img }}" readonly></td>
         </tr>
+        
     </table>
 
-    <form action="/db/store" method="post">
-    @csrf
+    
     <p>登録しますか？</p> 
     <input type="submit" value="登録">
     <br>
