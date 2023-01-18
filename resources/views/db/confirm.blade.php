@@ -27,7 +27,7 @@
 <br><br>
 <div style="text-align:center;" text-align:center>
     <p>登録しますか？</p>
-    <input class="btn btn-info  w-45type=" submit" value="登録">
+    <input type="submit" class="btn btn-info  w-45type" value="登録">
 </div>
 <br>
 <div style="text-align:right">
