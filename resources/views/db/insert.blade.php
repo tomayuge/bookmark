@@ -4,21 +4,22 @@
 
 <div style="text-align:center;"  text-align:center>
 
-    <h2>書籍の新規登録</h2><br>
+    <h2>書籍の新規登録</h2>
+    <p>13桁のISBNコードを入力してください。</ｐ>
     <form action="/db/confirm" method="post">
-       
+       <br>
     @csrf
         ISBN
         <br>
         
-        <input type="text" name="isbnSearch" required>
+        <input type="text" name="isbnSearch" placeholder="13桁のISBNを入力" required>
         </div>
         <br>
-        <center><input type="submit" value="検索" class="btn btn-info rounded-0 col-4 d-grid"></center>
+        <center><input type="submit" value="検索" class="btn btn-info rounded-0 d-grid" ></center>
 </div>
 <br><br>
 
-<div style="text-align:center">
+<div style="text-align:right">
 <a href="/db/index">Topページに戻る</a>
 </div>
 </form>
