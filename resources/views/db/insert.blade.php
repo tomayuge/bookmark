@@ -5,7 +5,7 @@
     <form action="/db/confirm" method="post">
         @csrf
         ISBN<input type="text" name="isbnSearch" required>
-        <input type="submit" value="検索">
+        <input type="submit" value="検索" class="btn btn-outline-dark">
 
         <br>
     <a href="/db/index">Topページに戻る</a>
@@ -36,5 +36,9 @@
             <input type="text" class="form-control" id="img" name="img" required><br>
         </div><br>
         <input class="btn btn-info w-45" type="submit" value="確認">
--->
+        -->
+    <br><br>
+    <a href="/db/index">Topページに戻る</a>
+    </form>
+    
 @endsection
