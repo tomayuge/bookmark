@@ -14,7 +14,7 @@
         <input type="text" name="isbnSearch" required>
         </div>
         <br>
-        <center><input type="submit" value="検索" class="btn btn-outline-dark"></center>
+        <center><input type="submit" value="検索" class="btn btn-info rounded-0 col-4 d-grid"></center>
 </div>
 <br><br>
 
