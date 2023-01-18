@@ -19,9 +19,8 @@
             <td><input type="text" name="writer" value="{{ $writer }}" readonly></td>
             <td><input type="text" name="publisher" value="{{ $publisher }}" readonly></td>
             <td><input type="text" name="price" value="{{ $price }}" readonly></td>
-            <td><figure class="photo-detail__pane photo-detail__image">
-            <img :src="{{ $img }}" alt="">
-            </figure></td>
+            <td><input type="hidden" name="img" value="{{ $img }}" readonly>
+            <img src="{{ $img }}"></td>
         </tr>
 
 </table>
