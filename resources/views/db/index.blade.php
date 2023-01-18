@@ -8,11 +8,14 @@
     </footer> -->
     
 <!-- <h1>トップページ</h1> -->
+<div style="text-align:center;"  text-align:center>
     <form action="/db/search" method="post">
         @csrf
+        <h2>Search</h2><br>
         <input type="text" name="keyword" required>
         <input type="submit" value="検索" class="btn btn-outline-dark">
         <br>
+        
     </form>
     <ul>
         <!-- <li><a href="/db/insert" >書籍の新規登録</a></li>
@@ -22,4 +25,5 @@
         <br><br>
         <a href="/db/list" class="btn btn-light">全件表示</a>
     </ul>
+    </div>
 @endsection

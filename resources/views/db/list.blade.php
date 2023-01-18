@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title','search')
 @section('main')
-    <a href="/">Topページに戻る</a>
+    <a href="/db/index">Topページに戻る</a>
     <form action="/db/search" method="post">
         @csrf
         <input type="text" name="keyword">
@@ -30,6 +30,6 @@
     </table>
     <br>
     {{ $records->links() }} 
-    <a href="/">Topページに戻る</a>
+    <a href="/db/index">Topページに戻る</a>
     <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
 @endsection
