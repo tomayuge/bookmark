@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::post('/db/login','DbController@login');//新規登録用フォーム(確認)
+Route::post('/db/login','DbController@login');//ログイン用
 Route::get('/db/index','DbController@index');//ログイン後に表示するindexページ
 Route::get('/db/list','DbController@list');//全件表示用のビューを呼び出す
 Route::get('/db/insert','DbController@insert');//新規登録用フォーム(ISBN)
