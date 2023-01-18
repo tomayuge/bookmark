@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('user_name');
             $table->string('pass');
             $table->timestamps();
+
+            // リレーションシップの設定
+            // 外部キー「user_id」はテーブル「books」の「id」列を参照する
+            $table->foreign('user_id')->references('account_id')->on('reviews');
         });
     }
 

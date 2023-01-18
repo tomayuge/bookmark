@@ -15,14 +15,8 @@
         
         <tr>
             <td>{{ $record -> img }}</td>
-            <td>{{ $record -> book_name }}</td>
-            <td><div id="star">
-                @if(isset($record -> review ->score))
-                <star-rating :rating="{{ $record -> review -> score }}" :read-only="true" :increment="0.01">
-                </star-rating>
-                @endif
-                </div>
-            </td>
+            <td><a href="/db/bookView">{{ $record -> book_name }}</a></td>
+            <td>{{ $record -> reviews -> average('score') }}</td>
             <td>{{ $record -> writer }}</td>
             <td>{{ $record -> publisher }}</td>
             <td>{{ $record -> ISBN }}</td>

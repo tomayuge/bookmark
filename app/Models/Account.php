@@ -9,8 +9,8 @@ class Account extends Model
 {
     use HasFactory;
 
-    public function accounts()
+    public function review()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(Review::class);
     }
 }

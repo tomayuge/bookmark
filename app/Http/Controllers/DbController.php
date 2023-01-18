@@ -91,7 +91,7 @@ class DbController extends Controller
     public function search(Request $req)
     {
         $keyword = $req -> keyword;
-        $query = Book::query(); //Bookモデルのクエリビルダを開始、ページネーションを[5]で指定
+        $query = Book::query(); //Bookモデルのクエリビルダを開始
         if(isset($keyword)){
             $array_words = preg_split( '/\s+/ui' , $keyword , -1 ,PREG_SPLIT_NO_EMPTY); //スペース区切りでキーワードを配列に格納
             foreach($array_words as $word){
@@ -156,16 +156,21 @@ class DbController extends Controller
     //全レコードを取得するモデル内のメソッドを実行
     public function list()
     {
-        $book = Book::paginate(2);
-        $score = $book -> review -> score;
+        $book = Book::all();
+        
+        //$score = $book -> review -> score;
+        $score = 0;
+        
         if($score===null){
             $score=0;
         }
         $data = [
+            'reviews' => Review::all(),
             //全レコードを取得するモデル内のメソッドを実行し保存
             'records' => Book::paginate(2),
             'score' => $score
         ];
+        //dd($data);
         return view('db.list',$data);
     }
 

@@ -20,13 +20,14 @@ return new class extends Migration
             $table->string('comment');
             $table->unsignedBigInteger('account_id');//外部キー
             
+            $table->timestamps();
 
             // リレーションシップの設定
             // 外部キー「user_id」はテーブル「books」の「id」列を参照する
             $table->foreign('book_id')->references('id')->on('books');
             $table->foreign('account_id')->references('id')->on('accounts');
 
-            $table->timestamps();
+            
         });
     }
 
