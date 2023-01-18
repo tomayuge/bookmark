@@ -17,7 +17,7 @@
     <td>{{ $writer }}</td>
     <td>{{ $publisher }}</td>
     <td>{{ $price }}</td>
-    <td>{{ $img }}</td>
+    <td><img src="{{ $img }}"></td>
 </tr>
 </table>
     <br>
