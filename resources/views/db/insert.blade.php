@@ -1,17 +1,28 @@
 @extends('layouts.base')
 @section('title','Bookmark')
 @section('main')
-<h2>書籍の新規登録</h2><br>
+
+<div style="text-align:center;"  text-align:center>
+
+    <h2>書籍の新規登録</h2><br>
     <form action="/db/confirm" method="post">
-        @csrf
-        ISBN<input type="text" name="isbnSearch" required>
-        <input type="submit" value="検索" class="btn btn-outline-dark">
-
+       
+    @csrf
+        ISBN
         <br>
-    <a href="/db/index">Topページに戻る</a>
-    </form>
+        
+        <input type="text" name="isbnSearch" required>
+        </div>
+        <input type="submit" value="検索" class="btn btn-outline-dark">
+</div>
+<br><br>
 
-        <!-- <div>
+<div style="text-align:right">
+<a href="/db/index">Topページに戻る</a>
+</div>
+</form>
+
+<!-- <div>
             <label for="isbn" class="form_label">ISBN</label>
             <input type="text" class="form-control" id="isbn" name="isbn" required><br>
         </div>
@@ -37,8 +48,7 @@
         </div><br>
         <input class="btn btn-info w-45" type="submit" value="確認">
         -->
-    <br><br>
-    <a href="/db/index">Topページに戻る</a>
-    </form>
-    
+
+</form>
+
 @endsection
