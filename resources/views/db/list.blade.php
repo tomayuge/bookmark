@@ -17,8 +17,10 @@
             <td>{{ $record -> img }}</td>
             <td>{{ $record -> book_name }}</td>
             <td><div id="star">
+                @if(isset($record -> review ->score))
                 <star-rating :rating="{{ $record -> review -> score }}" :read-only="true" :increment="0.01">
                 </star-rating>
+                @endif
                 </div>
             </td>
             <td>{{ $record -> writer }}</td>
@@ -31,5 +33,6 @@
     <br>
     {{ $records->links() }} 
     <a href="/db/index">Topページに戻る</a>
+    <a href="/db/review">レビューページ</a>
     <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
 @endsection
