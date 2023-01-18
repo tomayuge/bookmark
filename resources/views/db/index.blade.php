@@ -8,22 +8,28 @@
     </footer> -->
     
 <!-- <h1>トップページ</h1> -->
+<div style="text-align:right">
+        <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;"" >新規登録</a>
+        <!-- <br> -->
+        <!-- <br> -->
+        <a href="/db/list" class="btn btn-info  rounded-circle" style="width:4rem;height:4rem;"">全件表示</a>
+    </ul>
+    </div>
+
+
 <div style="text-align:center;"  text-align:center>
-    <form action="/db/search" method="post">
+    <form class= novalidate action="/db/search" method="post">
         @csrf
+        <br><br>
         <h2>Search</h2><br>
-        <input type="text" name="keyword" required>
-        <input type="submit" value="検索" class="btn btn-outline-dark">
+        <input type="text" name="keyword"  placeholder="検索したいキーワードを入力"required>
+        <input type="submit" value="検索" class="btn btn-info rounded-0">
         <br>
         
     </form>
     <ul>
         <!-- <li><a href="/db/insert" >書籍の新規登録</a></li>
         <li><a href="/db/list">全件表示</a></li> -->
-
-        <a href="/db/insert" class="btn btn-light" >書籍の新規登録</a>
-        <br><br>
-        <a href="/db/list" class="btn btn-light">全件表示</a>
-    </ul>
-    </div>
+<br>
+ 
 @endsection

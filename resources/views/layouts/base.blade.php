@@ -14,6 +14,7 @@
       margin: 10px;
       padding: 0;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
+      background-color: ghostwhite;
       /* text-align: center;  */
 
     }

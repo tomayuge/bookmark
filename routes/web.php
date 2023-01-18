@@ -25,3 +25,4 @@ Route::post('/db/confirm','DbController@confirm');//新規登録用フォーム(
 Route::post('/db/store','DbController@store');//新規登録
 Route::post('/db/search','DbController@search');//検索用
 Route::post('/db/bookView','DbController@bookView');//bookView表示用
+Route::get('/db/review','DbController@review');//レビューページ呼び出し

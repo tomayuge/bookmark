@@ -27,5 +27,6 @@
     <br>
     {{ $records->links() }} 
     <a href="/db/index">Topページに戻る</a>
+    <a href="/db/review">レビューページ</a>
     <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
 @endsection
