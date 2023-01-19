@@ -14,12 +14,14 @@
         <br><textarea rows="5" id="comment" name="comment" required></textarea>
     </p>
     <p>点数を５段階で入力してください
-        <br><input type="number" max="5" id="score" name="score" required>
+        <br>
+        <input type="radio" name="score" value="1" checked>1
+        <input type="radio" name="score" value="2">2
+        <input type="radio" name="score" value="3">3
+        <input type="radio" name="score" value="4">4
+        <input type="radio" name="score" value="5">5
     </p>
-    <p>名前
-        <br><input type="text" id="account_id" name="account_id" required>
-    </p>
-    <input type="hidden" name="account_id" value={{ $account_id }} readonly>
+    <!-- <input type="hidden" name="account_id" value= account_id }}" readonly> -->
     <input type="submit" value="登録"> 
     </form>
     <br><a href="/">戻る</a>

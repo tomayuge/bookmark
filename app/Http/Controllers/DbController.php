@@ -145,11 +145,14 @@ class DbController extends Controller
     //レビュー投稿
     public function review(Request $req)
     {
+        if(session()->get('account_id')===null){
+            return view('login');
+        }
         $review = new Review();
         $review->book_id = $req -> id;
         $review->score = $req->score;
         $review->comment = $req->comment;
-        $review->account_id = $req->account_id;
+        $review->account_id = session()->get('account_id');
 
         //Booksテーブルにデータを保存
         $review->save();
@@ -160,7 +163,6 @@ class DbController extends Controller
 
     public function editReview(Request $req)
     {   
-
         $editReview = Review::find($req -> id);
         $editReview -> score = $req -> score;
         $editReview -> comment = $req -> comment;
@@ -182,13 +184,19 @@ class DbController extends Controller
     public function login(Request $req)
     {
         //アカウント情報とパスでログイン処理
-            $username = $req->user_name;
-            $pass = $req->pass;
-            session()->put('account_id',$username);
+        $username = $req->user_name;
+        $pass = $req->pass;
+        //$account = Account::all();
+        //$password = $account->pass;
+        $account = Account::where('user_name', $username)->first();
+        //dd($account);
+        $password = $account->pass;
+  
 
-        //$name = account::find($req->user_name);
-        //$pass = account::find($req->pass);
-        if(($username==='akamine'&&$pass==='pass')||($username==='yuge'&&$pass==='pass')||($username==='hosomi'&&$pass==='pass')||($username==='tsumatani'&&$pass==='pass')){
+        //$name = Account::find($req->user_name);
+        //$pass = Account::find($req->pass);
+        if($password===$pass){
+            session()->put('account_id',$username);
             return view('/db/index');
         }else{
             session()->flash('err_msg', '入力に誤りがあります。');
