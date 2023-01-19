@@ -37,7 +37,7 @@
                 <form action="/db/eraseData" method="post">
                     @csrf
                     <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-                    <input type="submit" value="削除">
+                    <input type="submit" value="削除" class="btn btn-info rounded-0 d-grid">
                 </form>
             </td>
     </tr>

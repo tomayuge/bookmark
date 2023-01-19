@@ -14,7 +14,7 @@
         
         <!-- <br> -->
         <!-- <br> -->
-        <a href="/db/list" class="btn btn-info  rounded-circle" style="width:4rem;height:4rem;"">全件表示</a>
+        <a href="/db/list" class="btn btn-info  rounded-circle" style="width:4rem;height:4rem;">全件表示</a>
     </ul>
     </div>
 
