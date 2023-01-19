@@ -127,7 +127,7 @@ class DbController extends Controller
              }
              
         }
-        $this -> $req -> session() -> put('keyword',$keyword);                
+        //$this -> $req -> session() -> put('keyword',$keyword);                
         $data=[
             'records' => $query ,
             'count' => $query -> count(),
