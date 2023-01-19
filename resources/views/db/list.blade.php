@@ -38,7 +38,7 @@
                 <form action="/db/eraseData" method="post">
                     @csrf
                     <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-                    <input type="submit" value="削除">
+                    <input type="submit" value="削除" class="btn btn-info rounded-0 d-grid">
                 </form>
             </td>
     </tr>
@@ -52,5 +52,6 @@
 <a href="/db/review">レビューページ</a>
 <!-- <a href="/db/review" class="text-dark">レビューページ</a> -->
 
-
+<script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+>>>>>>> 5662b37d8a4748e6c533b5d7a01fae2027874768
 @endsection
