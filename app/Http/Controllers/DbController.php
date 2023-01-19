@@ -214,7 +214,6 @@ class DbController extends Controller
 
     public function editReview(Request $req)
     {   
-        dd($req->id);
         $editReview = Review::find($req -> id);
         $editReview -> score = $req -> score;
         $editReview -> comment = $req -> comment;
@@ -230,8 +229,20 @@ class DbController extends Controller
             'records' => $book
         ];
 
+        
+
         session()->flash('ok_msg', 'editted');
         return view('db.bookView',$data);
+    }
+
+    public function deleteReview(Request $req)
+    {   
+        $id=$req->id;//レビューのid取得
+
+        $review = Review::find($id);
+        $review->delete();
+        session()->flash('ok_msg', '削除しました。');
+        return view('db.bookView');
     }
 
     //ログイン処理
