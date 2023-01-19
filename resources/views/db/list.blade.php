@@ -72,5 +72,5 @@
             <!-- <a href="/db/review" class="text-dark">レビューページ</a> -->
         </div>
     </div>
-    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     @endsection

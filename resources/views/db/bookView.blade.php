@@ -7,9 +7,10 @@
     <a href="/db/list" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;">一覧</a>
 </div> -->
 
-<div style="padding-left: 15px; ">
+<div style="text-align:right">
     <a href="/db/index" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;">Top</a>
     <a href="/db/list" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;">一覧</a>
+</div>
 
 
     <br>
@@ -19,7 +20,7 @@
         {{ session('ok_msg') }}
     </div>
     @endif
-    <table>
+    <center><table  >
         <tr>
             <td rowspan="6"><img src="{{ $records -> img }}" height="400"></td>
         </tr>
@@ -49,9 +50,9 @@
                 </form>
             </td>
         </tr>
-    </table>
-    <hr>
-    <table>
+    </table></center>
+ 
+    <table class="table">
         <tr>
             <td>ユーザ名</td><td>評価点</td><td>レビュー</td><td>投稿日</td><td>操作</td>
         </tr>
@@ -59,24 +60,24 @@
         <tr>
             <td>{{ $review -> account -> user_name }}</td>
             <td>{{ $review -> score }}</td>
-            <td class="col-5" style="word-wrap:break-word;">レビュー<br>{{ $review -> comment }}</td>
+            <td class="col-5" style="word-wrap:break-word;">{{ $review -> comment }}</td>
             <td>{{ $review -> created_at }}</td>
-            <td>
+            
                 <!-- モーダルを開くボタン -->
             <div class="container">
                 <div class="row my-3">
-                
                     <div class="row mb-5">
                         <div class="col-2">
-                            <button type="button" class="btn btn-info mb-12 rounded-0" data-toggle="modal" data-target="#editModal{{ $review->id }}" data-backdrop="false">EDIT</button>
-                        </div></td>
-
-                        <td><div class="col-2">
-                            <button type="button" class="btn btn-dark mb-12 rounded-0" data-toggle="modal" data-target="#eraseModal{{ $review->id }}" data-backdrop="false">ERASE</button>
+                            <td>
+                            <button type="button" class="btn btn-info mb-12 rounded-0" data-toggle="modal" data-target="#editModal{{ $review->id }}" data-backdrop="false">変更</button>
+                            <button type="button" class="btn btn-dark mb-12 rounded-0" data-toggle="modal" data-target="#eraseModal{{ $review->id }}" data-backdrop="false">削除</button>
+                            </td>
                         </div>
                     </div>
                 </div>
-            </div></td>
+            </div>
+            
+            
             <!-- ボタンクリック後に表示される画面の内容 編集用モーダル -->
             <div class="modal fade" id="editModal{{$review->id}}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                  <div class="modal-dialog">
@@ -88,17 +89,17 @@
                             <h4 class="modal-title" id="myModalLabel">レビュー編集</h4>
                         </div>
                             <div class="modal-body">
+
                                 <input type="hidden" name="id" value="{{ $review -> id }}">
                                 <input type="textarea" name="comment" value="{{ $review -> comment }}">
-                                <p>評価編集
-                                    <br> 
-                                    <input type="radio" id="score" name="score" value="1" checked>1
-                                    <input type="radio" id="score" name="score" value="2" checked>2
+                                <br><br>
+                                評価編集 <br>
+                                    <input type="radio" id="score" name="score" value="1" >1
+                                    <input type="radio" id="score" name="score" value="2" >2
                                     <input type="radio" id="score" name="score" value="3" checked>3
-                                    <input type="radio" id="score" name="score" value="4" checked>4
-                                    <input type="radio" id="score" name="score" value="5" checked>5
-                    
-                                </p>
+                                    <input type="radio" id="score" name="score" value="4" >4
+                                    <input type="radio" id="score" name="score" value="5" >5
+                                        
                             </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
@@ -137,7 +138,7 @@
         </tr>
     @endforeach
 </table>
-</div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 @endsection

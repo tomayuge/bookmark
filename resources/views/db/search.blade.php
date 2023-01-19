@@ -40,7 +40,15 @@
                     <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
                 </form>
             </td>
-            <td>{{ $avg = floor($record -> reviews -> average('score')*10)/10 }} ({{ $record -> reviews -> count() }}件)</td>
+            <td>
+                <div class="rateYo" id="rating" 
+                data-rateyo-rating=""
+                data-rateyo-num-stars="5"
+                data-rateyo-score="{{ $avg = floor($record -> reviews -> average('score')*10)/10 }}">
+                </div> 
+                
+                ({{ $record -> reviews -> count() }}件)
+            </td>
             <td>{{ $record -> writer }}</td>
             <td>{{ $record -> publisher }}</td>
             <td>￥{{ $record -> price }}</td>
@@ -58,4 +66,13 @@
     <br>
     <a href="/db/index">Topページに戻る</a>
 </div>
+<script>
+    $(function){
+        $("#rateYo").rateYo({
+            rating:{{ $avg }},
+            halfStar:true
+        });
+    };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 @endsection
