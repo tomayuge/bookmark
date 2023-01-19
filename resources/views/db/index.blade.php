@@ -9,6 +9,11 @@
 
 <!-- <h1>トップページ</h1> -->
 <div style="padding-right: 15px;">
+@if (session('ok_msg'))
+    <div style="text-align:center;" p class="text-danger" text-align:center>
+        {{ session('ok_msg') }}
+    </div>
+    @endif
     <div style="text-align:right">
         <!-- <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;"" >新規登録</a> -->
         <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;">新規登録</a>
