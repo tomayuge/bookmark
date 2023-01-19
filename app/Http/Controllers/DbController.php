@@ -134,8 +134,9 @@ class DbController extends Controller
     public function bookView(Request $req)
     {
         //受け取った値が単体か配列か検証する
-        $book = Book::find($req)->first();
-        $reviews = Review::where('book_id',$req);
+        $book_id = $req->book_id;
+        $book = Book::find($book_id)->first();
+        $reviews = Review::Where('book_id','=',$book_id)->get();
         
         $data =[
             'records' => $book,

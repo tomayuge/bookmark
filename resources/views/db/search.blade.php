@@ -17,12 +17,8 @@
         <!-- 下記でデータの受け渡しができるか。recordだけで全てのデータを受け渡しできるか検証する -->
         <tr><a href="{{route('/db/bookView',$record ->id)}}">{{ $record -> img }}</a></tr>
         <tr><a href="{{route('/db/bookView',$record)}}">{{ $record -> book_name}}</a></tr>
-        <tr><div id="star">
-            <star-rating v-bind:increment="0.1"
-                         v-bind:star-points="{{}}"
-                        >
-
-            </star-rating>
+        <tr>
+            
             </div>{{ $score }}
         </tr>
         <tr>{{ $record -> writer }}</tr>
