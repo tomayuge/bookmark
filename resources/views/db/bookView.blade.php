@@ -29,29 +29,19 @@
             <td>
                          {{ $review -> score }}</td>
             <td>{{ $review -> comment }}</td>
-            <td>
-                <form action="/db/review" method="post">
-                @csrf
-                <input type="hidden" name="id" value="{{ $records -> id }}">
-                <input type="submit" class="btn btn-outline-success" value="EDIT"></form>
-
-                <form action="/db/eraseReview" method="post">
-                @csrf
-                <input type="hidden" name="id" value="{{ $records -> id }}">
-                <input type="submit" class="btn btn-outline-danger" value="ERASE"></form>
-            </td>
+            
             <td>
                 <!-- モーダルを開くボタン -->
             <div class="container">
                 <div class="row my-3">
-                    <h1>モーダルを開く</h1>
-                </div>
-                <div class="row mb-5">
-                    <div class="col-2">
-                        <button type="button" class="btn btn-primary mb-12" data-toggle="modal" data-target="#editModal" data-backdrop="false">EDIT</button>
-                    </div>
-                    <div class="col-2">
-                        <button type="button" class="btn btn-danger mb-12" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">ERASEく</button>
+                
+                    <div class="row mb-5">
+                        <div class="col-2">
+                            <button type="button" class="btn btn-primary mb-12" data-toggle="modal" data-target="#editModal" data-backdrop="false">EDIT</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-danger mb-12" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">ERASEく</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,7 +53,7 @@
                             <!-- ここからformタグ -->
                         <form action="/db/editReview" method="post">
                         @csrf
-                            <h4>class="modal-title" id="myModalLabel">EDIT REVIEW</h4></h4>
+                            <h4><class="modal-title" id="myModalLabel">EDIT REVIEW</h4></h4>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" value="{{ $review -> id }}">
