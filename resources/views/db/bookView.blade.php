@@ -14,7 +14,11 @@
 
     <br>
     <br>
-
+    @if (session('ok_msg'))
+    <div style="text-align:center;" p class="text-danger" text-align:center>
+        {{ session('ok_msg') }}
+    </div>
+    @endif
     <table>
         <tr>
             <td rowspan="6"><img src="{{ $records -> img }}" height="400"></td>
