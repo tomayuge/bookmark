@@ -12,7 +12,7 @@
         <th>価格</th>
         <th>画像</th>
     </tr>
-    <form action="/db/delete" method="post">
+    <form action="/db/bookDelete" method="post">
         @csrf
         <tr>
             <td><input type="text" name="isbn" value="{{ $record->isbn }}" readonly></td>
