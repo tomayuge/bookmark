@@ -25,12 +25,15 @@
         @csrf
         <br><br>
         <h2>Search</h2><br>
-        <input type="text" name="keyword" placeholder="検索したいキーワードを入力" required>
+        <input type="text" name="keyword" placeholder="キーワードを入力" required>
         <input type="submit" value="検索" class="btn btn-info rounded-0">
         <br>
 
     </form>
     <ul>
+        <body>
+            <img src="" alt="">
+        </body>
         <!-- <li><a href="/db/insert" >書籍の新規登録</a></li>
         <li><a href="/db/list">全件表示</a></li> -->
         <br>
