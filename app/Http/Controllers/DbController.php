@@ -137,7 +137,7 @@ class DbController extends Controller
         $book_id = $req->book_id;
         $book = Book::find($book_id)->first();
         $reviews = Review::Where('book_id','=',$book_id)->get();
-        
+        session()->put('book_id',$book_id);
         $data =[
             'records' => $book,
             'reviews' => $reviews
@@ -162,8 +162,9 @@ class DbController extends Controller
         if(session()->get('account_id')===null){
             return view('login');
         }
+        $book_id = session()->get('book_id');
         $review = new Review();
-        $review->book_id = $req -> book_id;
+        $review->book_id = $book_id;
         $review->score = $req->score;
         $review->comment = $req->comment;
         $review->account_id = session()->get('account_id');
