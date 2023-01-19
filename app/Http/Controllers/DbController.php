@@ -241,8 +241,13 @@ class DbController extends Controller
 
         $review = Review::find($id);
         $review->delete();
+        $book = Book::where('id','=',session()->get('book_id'))->first();
+        $data = [
+            'reviews' => Review::all(),
+            'records' => $book
+        ];
         session()->flash('ok_msg', '削除しました。');
-        return view('db.bookView');
+        return view('db.bookView',$data);
     }
 
     //ログイン処理
