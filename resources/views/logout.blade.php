@@ -1,5 +1,5 @@
-@extends('layouts.base')
-@section('title','search')
+@extends('layouts.base_login')
+@section('title','Bookmark')
 @section('main')
 <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/sign-in/">
 
