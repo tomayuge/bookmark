@@ -231,8 +231,8 @@ class DbController extends Controller
 
         
 
-        session()->flash('ok_msg', 'editted');
-        return view('db.bookView',$data);
+        session()->flash('ok_msg', 'レビューを編集しました。');
+        return view('index');
     }
 
     public function deleteReview(Request $req)
@@ -246,8 +246,8 @@ class DbController extends Controller
             'reviews' => Review::all(),
             'records' => $book
         ];
-        session()->flash('ok_msg', '削除しました。');
-        return view('db.bookView',$data);
+        session()->flash('ok_msg', 'レビューを削除しました。');
+        return view('db.index');
     }
 
     //ログイン処理
