@@ -30,7 +30,7 @@
             <input type="radio" name="score" value="5">5
         </p>
         <!-- <input type="hidden" name="account_id" value= account_id }}" readonly> -->
-        <br> <input type="submit" value="登録" class="btn btn-info rounded-0">
+        <br> <input type="submit" value="登録" class="btn btn-danger rounded-0">
     </form>
     <div style="text-align:right">
         <br><a href="/db/list" class="btn btn-info  rounded-circle" style="width:4rem;height:4rem;">戻る</a>

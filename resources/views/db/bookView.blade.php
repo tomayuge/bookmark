@@ -79,7 +79,7 @@
                             <!-- ここからformタグ -->
                         <form action="/db/editReview" method="post">
                         @csrf
-                            <h4　class="modal-title" id="myModalLabel">レビュー編集</h4>
+                            <h4 class="modal-title" id="myModalLabel">レビュー編集</h4>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" value="{{ $review -> id }}">
