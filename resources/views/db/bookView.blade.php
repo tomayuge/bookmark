@@ -2,6 +2,7 @@
 @section('title','search')
 @section('main')
 <a href="/db/index">Topページに戻る</a>
+<br><br>
 <table>
     <tr><td rowspan="6"><img src="{{ $records -> img }}" height="400"></td></tr>
     <tr><td>書籍名<br>{{ $records -> book_name }}</td></tr>
@@ -15,7 +16,8 @@
             <form action="/db/reviewView" method="post">
                 @csrf
                 <input type="hidden" name="book_id" value="{{ $records -> id }}">
-                <input type="submit" class="btn btn-outline-primary" value="レビューを登録する">
+                <!-- <input type="submit" class="btn btn-outline-primary" value="レビューを登録する"> -->
+                <br><input type="submit" class="btn btn-outline-secondary rounded-0" value="レビューを登録する">
             </form>
         </td>
     </tr>

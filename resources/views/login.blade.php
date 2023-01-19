@@ -41,7 +41,7 @@
 <link href="signin.css" rel="stylesheet">
 
 
-<form class="needs-validation col-3 mx-auto" novalidate action="/db/login" method="post">
+<form class="needs-validation col-2 mx-auto" novalidate action="/db/login" method="post">
     @csrf
 
     <div style="margin-left:40px">ユーザー名<br><input class="col-10 mb-10" type="text" id="user_name" name="user_name" placeholder="ユーザー名を入力" required></div>
