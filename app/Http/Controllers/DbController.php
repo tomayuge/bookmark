@@ -181,11 +181,15 @@ class DbController extends Controller
     //ログイン処理
     public function login(Request $req)
     {
-        $account = Account::find($req->user_name);
-        $password = $account->pass;
         //アカウント情報とパスでログイン処理
-            $username = $req->user_name;
-            $pass = $req->pass;
+        $username = $req->user_name;
+        $pass = $req->pass;
+        //$account = Account::all();
+        //$password = $account->pass;
+        $account = Account::where('user_name', $username)->first();
+        //dd($account);
+        $password = $account->pass;
+     
             session()->put('account_id',$username);
 
         //$name = Account::find($req->user_name);
