@@ -12,7 +12,7 @@
 
     
     @csrf
-        <div style=margin-left:-280px text-align:center>
+        <div style=margin-left:-250px text-align:center>
             ISBN
         </div>
 <input class="col-8 mb-10" type="text" name="isbnSearch" placeholder="13桁のISBNを入力" required>
