@@ -208,16 +208,19 @@ class DbController extends Controller
 
     public function editReview(Request $req)
     {   
+        dd($req->id);
         $editReview = Review::find($req -> id);
         $editReview -> score = $req -> score;
         $editReview -> comment = $req -> comment;
 
-        //Booksテーブルにデータを保存
+        //reviewテーブルにデータを保存
         $editReview->save();
 
-        $book = Book::all();
+
+        $book = Book::where('id','=',session()->get('book_id'))->first();
 
         $data = [
+            'reviews' => Review::all(),
             'records' => $book
         ];
 

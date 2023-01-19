@@ -26,15 +26,13 @@
     </tr>
 </table>    
 <hr>
-<p>Reviews</p>
 <table>
     @foreach($reviews as $review)
     <tr>
+            <td>{{ $review -> id }}</td>
             <td>{{ $review -> account -> user_name }}</td>
-            <td>
-                         {{ $review -> score }}</td>
+            <td>{{ $review -> score }}</td>
             <td>{{ $review -> comment }}</td>
-            
             <td>
                 <!-- モーダルを開くボタン -->
             <div class="container">
@@ -59,14 +57,21 @@
                             <!-- ここからformタグ -->
                         <form action="/db/editReview" method="post">
                         @csrf
-                            <h4><class="modal-title" id="myModalLabel">EDIT REVIEW</h4></h4>
+                            <h4 class="modal-title" id="myModalLabel">レビュー編集</h4>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" value="{{ $review -> id }}">
+                            <p>コメント編集</p>
                             <input type="textarea" name="comment" value="{{ $review -> comment }}">
-                            <p>Please enter a score of 1 to 5.
-                                <br><input type="number" max="5" id="score" name="score" required>
-                            </p>
+                            
+                                <hr>
+                                <p>評価変更</p>
+                                <input type="radio" id="score" name="score" value="1" checked>1
+                                <input type="radio" id="score" name="score" value="2" checked>2
+                                <input type="radio" id="score" name="score" value="3" checked>3
+                                <input type="radio" id="score" name="score" value="4" checked>4
+                                <input type="radio" id="score" name="score" value="5" checked>5
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
@@ -84,13 +89,13 @@
                             <!-- ここからformタグ -->
                         <form action="/db/editReview" method="post">
                         @csrf
-                            <h4>class="modal-title" id="myModalLabel">EDIT REVIEW</h4></h4>
+                            <h4 class="modal-title" id="myModalLabel">レビュー削除</h4>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" value="{{ $review -> id }}">
                             <p>{{ $review -> comment }}</p>
-                            <p>
-                                <br><input type="number" max="5" id="score" name="score" required>
+                            <p>パスワード
+                                <br><input type="password" id="pass" name="pass" required>
                             </p>
                         </div>
                         <div class="modal-footer">
