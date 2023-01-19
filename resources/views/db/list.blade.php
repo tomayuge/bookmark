@@ -69,7 +69,7 @@
             <!-- <a href="/db/index">Topページに戻る</a> -->
             <a href="/db/index" class="text-dark">Topページに戻る</a><br>
             <!-- <a href="/db/review">レビューページ</a> -->
-            <a href="/db/review" class="text-dark">レビューページ</a>
+            <!-- <a href="/db/review" class="text-dark">レビューページ</a> -->
         </div>
     </div>
     <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
