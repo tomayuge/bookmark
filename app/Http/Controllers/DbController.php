@@ -123,7 +123,11 @@ class DbController extends Controller
 
                 //クエリビルダの結果を取得。複数カラムで検索しているので重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
                 //distinctいるかはテストで確認
-                $query = Book::Where('book_name','LIKE',"%$word%")->orWhere('writer','LIKE',"%$word%")->orWhere('publisher','LIKE',"%$word%") -> get();
+                $query = Book::query()
+                        ->Where('book_name','LIKE',"%$word%")
+                        ->orWhere('writer','LIKE',"%$word%")
+                        ->orWhere('publisher','LIKE',"%$word%") 
+                        -> get();
                             dd($query);
             }
         }
@@ -159,7 +163,9 @@ class DbController extends Controller
     {
         //受け取った値が単体か配列か検証する
         $book_id = $req->book_id;
-        $book = Book::find($book_id)->first();
+        
+        $book = Book::Where('id','=',$book_id)->first();
+        
         $reviews = Review::Where('book_id','=',$book_id)->get();
         session()->put('book_id',$book_id);
         $data =[
