@@ -27,33 +27,7 @@
                 @csrf
                 <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
                 <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
-<<<<<<< HEAD
-                </form>
-            </td>
-            <td>{{ $record -> reviews -> average('score') }}</td>
-            <td>{{ $record -> writer }}</td>
-            <td>{{ $record -> publisher }}</td>
-            <td>{{ $record -> ISBN }}</td>
-            <td>￥{{ $record -> price }}</td>
-            <td>
-                <form action="/db/eraseData" method="post">
-                    @csrf
-                    <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-                    <input type="submit" value="削除">
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </table>
-    <br>
-    {{ $records->links() }} 
-    <a href="/db/index">Topページに戻る</a>
-    <a href="/db/review">レビューページ</a>
-    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
-=======
             </form>
-<<<<<<< HEAD
-=======
         </td>
         <td>{{ $record -> reviews -> average('score') }} ({{ $record -> reviews -> count() }}件)</td>
         <td>{{ $record -> writer }}</td>
