@@ -24,7 +24,7 @@ Route::get('/db/insert','DbController@insert');//新規登録用フォーム(ISB
 Route::post('/db/checkIsbn','DbController@checkIsbn');//ISBNチェック画面
 Route::post('/db/confirm','DbController@confirm');//新規登録用フォーム(書籍確認)
 Route::post('/db/store','DbController@store');//新規登録完了
-Route::post('/db/search','DbController@search');//検索用
+Route::get('/db/search','DbController@search');//検索用
 Route::post('/db/bookView','DbController@bookView');//bookView表示用
 Route::post('/db/review','DbController@review');//レビュー用フォーム
 Route::post('/db/reviewView','DbController@reviewView');//reviewのビュー表示とbook_idを渡す

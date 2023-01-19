@@ -20,7 +20,7 @@
 
 
 <div style="text-align:center;"  text-align:center>
-    <form class= novalidate action="/db/search" method="post">
+    <form class= novalidate action="/db/search" method="get">
         @csrf
         <br><br>
         <h2>Search</h2><br>
