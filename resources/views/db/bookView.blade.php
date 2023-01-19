@@ -107,7 +107,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <!-- ここからformタグ -->
-                        <form action="/db/editReview" method="post">
+                        <form action="/db/delete" method="post">
                         @csrf
                             <h4 class="modal-title" id="myModalLabel">レビュー削除</h4>
                         </div>
@@ -120,8 +120,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
-                            <input type="submit" class="btn btn-danger" value="ERASE">
-                            </form>
+                            <input type="submit" class="btn btn-danger" value="削除">
+                        </form>
                         </div>
                     </div>
                 </div>
