@@ -11,9 +11,9 @@
     <hr>
 
     <table class="table" border="1">
-    <th><td>書籍名</td><td>レビュー</td><td>著者名</td><td>出版社名</td><td>価格</td></th>
+    <th><td>書籍名</td><td>レビュー</td><td>著者名</td><td>出版社名</td><td>価格</td><td>操作</td></th>
         @foreach($records as $record)
-        <th><td>書籍名</td><td>レビュー</td><td>著者名</td><td>出版社名</td><td>価格</td></th>
+        
         <tr>
             <td>
                 <!-- 画像と本の名前をbookViewへのリンクにしてます -->
@@ -38,7 +38,7 @@
                 <form action="/db/eraseData" method="post">
                     @csrf
                     <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-                    <input type="submit" value="削除">
+                    <input type="submit" value="削除" class="btn btn-info rounded-0 d-grid">
                 </form>
             </td>
     </tr>

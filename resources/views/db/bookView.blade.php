@@ -33,6 +33,7 @@
             <td>{{ $review -> account -> user_name }}</td>
             <td>{{ $review -> score }}</td>
             <td>{{ $review -> comment }}</td>
+            
             <td>
                 <!-- モーダルを開くボタン -->
             <div class="container">
@@ -57,21 +58,20 @@
                             <!-- ここからformタグ -->
                         <form action="/db/editReview" method="post">
                         @csrf
-                            <h4 class="modal-title" id="myModalLabel">レビュー編集</h4>
+                            <h4　class="modal-title" id="myModalLabel">レビュー編集</h4>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" value="{{ $review -> id }}">
-                            <p>コメント編集</p>
                             <input type="textarea" name="comment" value="{{ $review -> comment }}">
-                            
-                                <hr>
-                                <p>評価変更</p>
+                            <p>評価編集
+                                <br> 
                                 <input type="radio" id="score" name="score" value="1" checked>1
                                 <input type="radio" id="score" name="score" value="2" checked>2
                                 <input type="radio" id="score" name="score" value="3" checked>3
                                 <input type="radio" id="score" name="score" value="4" checked>4
                                 <input type="radio" id="score" name="score" value="5" checked>5
-                            
+               
+                            </p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
@@ -89,7 +89,7 @@
                             <!-- ここからformタグ -->
                         <form action="/db/editReview" method="post">
                         @csrf
-                            <h4 class="modal-title" id="myModalLabel">レビュー削除</h4>
+                            <h4　class="modal-title" id="myModalLabel">レビュー削除</h4>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" value="{{ $review -> id }}">
