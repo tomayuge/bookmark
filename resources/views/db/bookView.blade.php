@@ -50,9 +50,9 @@
     <table>
         @foreach($reviews as $review)
         <tr>
-            <td>{{ $review -> account -> user_name }}</td>
-            <td>{{ $review -> score }}</td>
-            <td>{{ $review -> comment }}</td>
+            <td>ユーザー名<br>{{ $review -> account -> user_name }}</td>
+            <td>評価点<br>{{ $review -> score }}</td>
+            <td class="col-5" style="word-wrap:break-word;">レビュー<br>{{ $review -> comment }}</td>
             
             <td>
                 <!-- モーダルを開くボタン -->
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div></td>
             <!-- ボタンクリック後に表示される画面の内容 編集用モダール -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                  <div class="modal-dialog">
@@ -80,19 +80,19 @@
                         @csrf
                             <h4 class="modal-title" id="myModalLabel">レビュー編集</h4>
                         </div>
-                        <div class="modal-body">
-                            <input type="hidden" name="id" value="{{ $review -> id }}">
-                            <input type="textarea" name="comment" value="{{ $review -> comment }}">
-                            <p>評価編集
-                                <br> 
-                                <input type="radio" id="score" name="score" value="1" checked>1
-                                <input type="radio" id="score" name="score" value="2" checked>2
-                                <input type="radio" id="score" name="score" value="3" checked>3
-                                <input type="radio" id="score" name="score" value="4" checked>4
-                                <input type="radio" id="score" name="score" value="5" checked>5
-               
-                            </p>
-                        </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="id" value="{{ $review -> id }}">
+                                <input type="textarea" name="comment" value="{{ $review -> comment }}">
+                                <p>評価編集
+                                    <br> 
+                                    <input type="radio" id="score" name="score" value="1" checked>1
+                                    <input type="radio" id="score" name="score" value="2" checked>2
+                                    <input type="radio" id="score" name="score" value="3" checked>3
+                                    <input type="radio" id="score" name="score" value="4" checked>4
+                                    <input type="radio" id="score" name="score" value="5" checked>5
+                    
+                                </p>
+                            </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
                             <input type="submit" class="btn btn-success" value="EDIT">
@@ -109,7 +109,7 @@
                             <!-- ここからformタグ -->
                         <form action="/db/editReview" method="post">
                         @csrf
-                            <h4　class="modal-title" id="myModalLabel">レビュー削除</h4>
+                            <h4 class="modal-title" id="myModalLabel">レビュー削除</h4>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" value="{{ $review -> id }}">
@@ -121,7 +121,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
                             <input type="submit" class="btn btn-danger" value="ERASE">
-                        </form>
+                            </form>
                         </div>
                     </div>
                 </div>
