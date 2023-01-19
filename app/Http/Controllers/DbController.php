@@ -161,7 +161,6 @@ class DbController extends Controller
 
     public function editReview(Request $req)
     {   
-
         $editReview = Review::find($req -> id);
         $editReview -> score = $req -> score;
         $editReview -> comment = $req -> comment;
@@ -182,14 +181,16 @@ class DbController extends Controller
     //ログイン処理
     public function login(Request $req)
     {
+        $account = Account::find($req->user_name);
+        $password = $account->pass;
         //アカウント情報とパスでログイン処理
             $username = $req->user_name;
             $pass = $req->pass;
             session()->put('account_id',$username);
 
-        //$name = account::find($req->user_name);
-        //$pass = account::find($req->pass);
-        if(($username==='akamine'&&$pass==='pass')||($username==='yuge'&&$pass==='pass')||($username==='hosomi'&&$pass==='pass')||($username==='tsumatani'&&$pass==='pass')){
+        //$name = Account::find($req->user_name);
+        //$pass = Account::find($req->pass);
+        if($password===$pass){
             return view('/db/index');
         }else{
             session()->flash('err_msg', '入力に誤りがあります。');
