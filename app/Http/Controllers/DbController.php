@@ -21,6 +21,17 @@ class DbController extends Controller
         return view('db.insert');
     }
 
+    //ISBNチェック画面
+    public function checkIsbn(Request $req)
+    {
+        $searchIsbn = $req->searchIsbn;
+        if(!isset($searchIsbn) || strlen($searchIsbn)!==13)
+        {
+            return redirect("/db/insert");//13桁以外は入力画面に強制移動
+        }
+        return view('db.checkIsbn');
+    }
+
     //確認ページ
     public function confirm(Request $req)
     {
