@@ -21,6 +21,17 @@ class DbController extends Controller
         return view('db.insert');
     }
 
+    //ISBNチェック画面
+    public function checkIsbn(Request $req)
+    {
+        $searchIsbn = $req->searchIsbn;
+        if(!isset($searchIsbn) || strlen($searchIsbn)!==13)
+        {
+            return redirect("/db/insert");//13桁以外は入力画面に強制移動
+        }
+        return view('db.checkIsbn');
+    }
+
     //確認ページ
     public function confirm(Request $req)
     {
@@ -203,16 +214,19 @@ class DbController extends Controller
 
     public function editReview(Request $req)
     {   
+        dd($req->id);
         $editReview = Review::find($req -> id);
         $editReview -> score = $req -> score;
         $editReview -> comment = $req -> comment;
 
-        //Booksテーブルにデータを保存
+        //reviewテーブルにデータを保存
         $editReview->save();
 
-        $book = Book::all();
+
+        $book = Book::where('id','=',session()->get('book_id'))->first();
 
         $data = [
+            'reviews' => Review::all(),
             'records' => $book
         ];
 

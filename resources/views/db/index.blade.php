@@ -10,7 +10,7 @@
 <!-- <h1>トップページ</h1> -->
 <div style="text-align:right">
         <!-- <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;"" >新規登録</a> -->
-        <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;"  >新規登録</a> 
+        <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;">新規登録</a> 
         
         <!-- <br> -->
         <!-- <br> -->
