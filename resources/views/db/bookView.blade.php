@@ -107,7 +107,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <!-- ここからformタグ -->
-                        <form action="/db/delete" method="post">
+                        <form action="/db/deleteReview" method="post">
                         @csrf
                             <h4 class="modal-title" id="myModalLabel">レビュー削除</h4>
                         </div>
