@@ -41,7 +41,7 @@
                     @csrf
                     <input type="hidden" name="book_id" value="{{ $records -> id }}">
                     <!-- <input type="submit" class="btn btn-outline-primary" value="レビューを登録する"> -->
-                    <br><input type="submit" class="btn btn-outline-secondary rounded-0" value="レビューを登録する">
+                    <br><input type="submit" class="btn btn-danger rounded-0" value="レビューを登録する">
                 </form>
             </td>
         </tr>
