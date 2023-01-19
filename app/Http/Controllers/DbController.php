@@ -104,7 +104,7 @@ class DbController extends Controller
             }
         }
 
-        $query -> paginate(4);  //※動作確認のため、4つで1ページにしてます
+        //$query -> paginate(4);  //※動作確認のため、4つで1ページにしてます
         
         $data=[
             'records' => $query,
@@ -118,11 +118,13 @@ class DbController extends Controller
     public function list()
     {
         $book = Book::all();
+        $allCount = $book -> count();
         
         $data = [
             'reviews' => Review::all(),
             //全レコードを取得するモデル内のメソッドを実行し保存
-            'records' => Book::paginate(4), //※動作確認のため、4つで1ページにしてます
+            'records' => Book::paginate(5), //※動作確認のため、5つで1ページにしてます
+            'allCount' => $allCount
         ];
         //dd($data);
         return view('db.list',$data);

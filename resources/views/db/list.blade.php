@@ -8,8 +8,8 @@
     </form>
 
     <hr>
-
-    <table class="table" border="1">
+    <p>全　{{ $allCount }}件</p>
+    <table class="table" border="1" >
         @foreach($records as $record)
         
         <tr>
@@ -17,7 +17,7 @@
                 <!-- 画像と本の名前をbookViewへのリンクにしてます -->
                 <form action="/db/bookView" method="post">
                 <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-                <input type="image" class="btn btn-link" src="{{ $record -> img }}" alt="詳細ページ" height="100">  
+                <input type="image" class="btn btn-link" src="{{ $record -> img }}" alt="詳細ページ" height="200">  
                 </form>
             </td>
             <td>
@@ -27,7 +27,7 @@
                 <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
                 </form>
             </td>
-            <td>{{ $record -> reviews -> average('score') }}</td>
+            <td><p>{{ $record -> reviews -> average('score') }}</p>{{ $record -> reviews -> count() }}件</td>
             <td>{{ $record -> writer }}</td>
             <td>{{ $record -> publisher }}</td>
             <td>{{ $record -> ISBN }}</td>
