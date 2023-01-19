@@ -2,20 +2,32 @@
 @section('title','Bookmark')
 @section('main')
 
+<div style="padding-right: 15px;">
+    <div style="text-align:right">
+        <!-- <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;"" >新規登録</a> -->
+
+        <a href="/db/index" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;">Top</a>
+        <!-- <br> -->
+        <!-- <br> -->
+        <a href="/db/list" class="btn btn-info  rounded-circle" style="width:4rem;height:4rem;">全件表示</a>
+        </ul>
+    </div>
+</div>
+
 <div style="text-align:center;" text-align:center>
 
     <h2>書籍の新規登録</h2>
     <p>13桁のISBNコードを入力してください。</p>
-        <!-- <form action="/db/confirm" method="post"> -->
+    <!-- <form action="/db/confirm" method="post"> -->
     <br>
-        <form action="/db/checkIsbn" method="post" class="needs-validation col-3 mx-auto" >
+    <form action="/db/checkIsbn" method="post" class="needs-validation col-3 mx-auto">
 
-    
-    @csrf
+
+        @csrf
         <div style=margin-left:-250px text-align:center>
             ISBN
         </div>
-<input class="col-8 mb-10" type="text" name="isbnSearch" placeholder="13桁のISBNを入力" required>
+        <input class="col-8 mb-10" type="text" name="isbnSearch" placeholder="13桁のISBNを入力" required>
 </div>
 <br><br>
 <center><input type="submit" value="検索" class="btn btn-info rounded-0 d-grid"></center>
@@ -25,9 +37,11 @@
 <br>
 <br>
 
-<div style="text-align:right">
-    <a href="/db/index">Topページに戻る</a>
-</div>
+<!-- <div style="padding-right: 15px;">
+    <div style="text-align:right">
+        <a href="/db/index">Topページに戻る</a>
+    </div>
+</div> -->
 </form>
 
 <!-- <div>
