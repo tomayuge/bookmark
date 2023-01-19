@@ -29,7 +29,7 @@
     <br><br><br>
     <div style="text-align:center">
         <p>このデータを削除しますか？</p>
-        <button type="button" onClick="history.back()" class="btn btn-info rounded-0  type">戻る</button>
+        <button type="button" onClick="history.back()" class="btn btn-dark rounded-0  type">戻る</button>
         <input type="submit" class="btn btn-danger rounded-0  type" value="削除">
     </div>
 

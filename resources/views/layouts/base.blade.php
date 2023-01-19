@@ -15,8 +15,8 @@
       /* margin: 10px;  */
       /* padding: 0;   */
       margin-top:    1px;
-      /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
       background-color: ghostwhite;
       /* text-align: center;  */
       
