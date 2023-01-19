@@ -25,10 +25,23 @@ class DbController extends Controller
     public function checkIsbn(Request $req)
     {
         $searchIsbn = $req->searchIsbn;
+        $registared = Book::find($searchIsbn)->count();
         if(!isset($searchIsbn) || strlen($searchIsbn)!==13)
         {
-            return redirect("/db/insert");//13桁以外は入力画面に強制移動
+            $msg="13桁のISBNコードを入力してください";
+            $data =[
+                'msg' => $msg
+            ];
+            return redirect("/db/insert",$data);//13桁以外は入力画面に強制移動
         }
+        if($registared>=1){
+            $msg = "既に登録済みです";
+            $data =[
+                'msg' => $msg
+            ];
+            return redirect("/db/insert",$data);//登録済の場合は強制移動
+        }
+
         return view('db.checkIsbn');
     }
 
@@ -124,23 +137,29 @@ class DbController extends Controller
     public function search(Request $req)
     {
         $keyword = $req -> keyword;
-        $query = Book::query(); //Bookモデルのクエリビルダを開始
-        
+        $query = Book::all(); //Bookモデルのクエリビルダを開始
+        //dd($query);
+        //dd($keyword);
         if(isset($keyword)){
             $array_words = preg_split( '/\s+/ui' , $keyword , -1 ,PREG_SPLIT_NO_EMPTY); //スペース区切りでキーワードを配列に格納
+            
             foreach($array_words as $word){
                 //dd($word);
                 $escape_word = addcslashes($word,'\\_%'); //エスケープ処理
 
-                //クエリビルダの結果を取得。複数カラムで検索しているので重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
                 //distinctいるかはテストで確認
-                $query = Book::where('book_name','LIKE',"%$word%") ->paginate(4);
+                $query = Book::where('book_name','LIKE',"%$word%") 
+                                ->orwhere('writer','LIKE',"%$word%")
+                                ->orwhere('publisher','LIKE',"%$word%")
+                                ->distinct();//distinctで重複データをはじく
              }
-             
+            
+        }else{
+            $keyword="";
         }
         //$this -> $req -> session() -> put('keyword',$keyword);                
         $data=[
-            'records' => $query ,
+            'records' => $query->paginate(5) ,
             'count' => $query -> count(),
             'keyword' => $keyword,
             'this' => $this
@@ -231,8 +250,8 @@ class DbController extends Controller
 
         
 
-        session()->flash('ok_msg', 'editted');
-        return view('db.index');
+        session()->flash('ok_msg', 'レビューを編集しました。');
+        return view('index');
     }
 
     public function deleteReview(Request $req)

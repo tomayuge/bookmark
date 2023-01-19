@@ -8,15 +8,16 @@
   <title>@yield('@title')</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
   <style>
     body {
       /* width: 500px; */
-      /* margin: 10px;  */
+      /* margin: 10px;  
       /* padding: 0;   */
-      margin-top:    1px;
-      /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* margin-top:    1px; */
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
       background-color: ghostwhite;
       /* text-align: center;  */
       
@@ -34,7 +35,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
       <!-- <nav class="navbar navbar-expand-lg" style="height:50px; background-color: #bccddb;"> -->
       <div style="padding: 15px;">
-        <a class="navbar-brand text-white" href="#">Bookmark</a>
+        <a class="navbar-brand text-white" href="/db/index">Bookmark</a>
       </div>
       <button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

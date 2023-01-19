@@ -49,7 +49,7 @@
 
     <div style="margin-left:40px">パスワード<br><input class="col-10 mb-10" type="password" id="pass" name="pass" placeholder="パスワードを入力" required></div>
     <br><br>
-    <center><input class="btn btn-info rounded-0  w-45  " type="submit" value="送信"></center>
+    <center><input class="btn btn-info rounded-0  w-45  " type="submit" value="ログイン"></center>
     <br><br>
 </form>
 @if (session('err_msg'))

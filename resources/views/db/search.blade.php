@@ -1,21 +1,29 @@
 @extends('layouts.base')
 @section('title','search')
 @section('main')
-    <!-- searchページ内で再検索できるようにformを設置 検索ワードも引き継いでいる -->
+<!-- searchページ内で再検索できるようにformを設置 検索ワードも引き継いでいる -->
+<div style="padding: 15px;">
     <form action="/db/search" method="get">
         @csrf
         <input type="text" name="keyword" value="{{ $keyword }}">
-        <input type="submit" value="検索">
+        <input type="submit" value="検索" class="btn btn-info rounded-0">
     </form>
 
     <hr>
-    
+
     <p>[ {{ $keyword }} ]の検索結果 {{ $count }}件</p>
 
     <table class="table">
-    <th><td>書籍名</td><td>レビュー</td><td>著者名</td><td>出版社名</td><td>価格</td><td>操作</td></th>
+        <th>
+        <td>書籍名</td>
+        <td>レビュー(平均)</td>
+        <td>著者名</td>
+        <td>出版社名</td>
+        <td>価格</td>
+        <td>操作</td>
+        </th>
         @foreach($records as $record)
-        
+
         <tr>
             <td>
                 <!-- 画像と本の名前をbookViewへのリンクにしてます -->
@@ -27,25 +35,44 @@
             </td>
             <td>
                 <form action="/db/bookView" method="post">
-                @csrf
-                <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-                <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
-            </form>
-        </td>
-        <td>{{ $record -> reviews -> average('score') }} ({{ $record -> reviews -> count() }}件)</td>
-        <td>{{ $record -> writer }}</td>
-        <td>{{ $record -> publisher }}</td>
-        <td>￥{{ $record -> price }}</td>
-        <td>
+                    @csrf
+                    <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
+                    <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
+                </form>
+            </td>
+            <td>
+                <div class="rateYo" id="rating" 
+                data-rateyo-rating=""
+                data-rateyo-num-stars="5"
+                data-rateyo-score="{{ $avg = floor($record -> reviews -> average('score')*10)/10 }}">
+                </div> 
+                
+                ({{ $record -> reviews -> count() }}件)
+            </td>
+            <td>{{ $record -> writer }}</td>
+            <td>{{ $record -> publisher }}</td>
+            <td>￥{{ $record -> price }}</td>
+            <td>
                 <form action="/db/eraseData" method="post">
                     @csrf
                     <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-                    <input type="submit" value="削除">
+                    <input type="submit" value="削除" class="btn btn-danger rounded-0">
                 </form>
             </td>
-    </tr>
-    @endforeach
-</table>
-    {{ $records->links() }} 
-    <a href="/">Topページに戻る</a>
+        </tr>
+        @endforeach
+    </table>
+    {{ $records->links() }}
+    <br>
+    <a href="/db/index">Topページに戻る</a>
+</div>
+<script>
+    $(function){
+        $("#rateYo").rateYo({
+            rating:{{ $avg }},
+            halfStar:true
+        });
+    };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 @endsection

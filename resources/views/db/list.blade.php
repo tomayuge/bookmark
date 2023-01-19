@@ -2,7 +2,7 @@
 @section('title','search')
 @section('main')
 <div style="padding: 15px;">
-    <form action="/db/search" method="post">
+    <form action="/db/search" method="get">
         @csrf
         <input type="text" name="keyword">
         <input type="submit" value="検索" class="btn btn-info rounded-0">
@@ -19,11 +19,11 @@
     </form>
 
     <hr>
-
+    <p>全 {{ $allCount }} 件</p>
     <table class="table" border="1">
         <th>
         <td>書籍名</td>
-        <td>レビュー</td>
+        <td>レビュー(平均)</td>
         <td>著者名</td>
         <td>出版社名</td>
         <td>価格</td>
@@ -47,7 +47,7 @@
                     <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
                 </form>
             </td>
-            <td>{{ $record -> reviews -> average('score') }} ({{ $record -> reviews -> count() }}件)</td>
+            <td>{{ $avg = floor($record -> reviews -> average('score')*10)/10 }} ({{ $record -> reviews -> count() }}件)</td>
             <td>{{ $record -> writer }}</td>
             <td>{{ $record -> publisher }}</td>
             <td>￥{{ $record -> price }}</td>
@@ -69,8 +69,8 @@
             <!-- <a href="/db/index">Topページに戻る</a> -->
             <a href="/db/index" class="text-dark">Topページに戻る</a><br>
             <!-- <a href="/db/review">レビューページ</a> -->
-            <a href="/db/review" class="text-dark">レビューページ</a>
+            <!-- <a href="/db/review" class="text-dark">レビューページ</a> -->
         </div>
     </div>
-    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     @endsection
