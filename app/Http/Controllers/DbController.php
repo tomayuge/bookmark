@@ -104,7 +104,7 @@ class DbController extends Controller
             }
         }
 
-        $query -> paginate(4);  //※動作確認のため、4つで1ページにしてます
+        //$query -> paginate(4);  //※動作確認のため、4つで1ページにしてます
         
         $data=[
             'records' => $query,
@@ -118,11 +118,13 @@ class DbController extends Controller
     public function list()
     {
         $book = Book::all();
+        $allCount = $book -> count();
         
         $data = [
             'reviews' => Review::all(),
             //全レコードを取得するモデル内のメソッドを実行し保存
-            'records' => Book::paginate(4), //※動作確認のため、4つで1ページにしてます
+            'records' => Book::paginate(5), //※動作確認のため、5つで1ページにしてます
+            'allCount' => $allCount
         ];
         //dd($data);
         return view('db.list',$data);
@@ -132,12 +134,25 @@ class DbController extends Controller
     public function bookView(Request $req)
     {
         //受け取った値が単体か配列か検証する
-        $book = Book::find($req);
-
+        $book = Book::find($req)->first();
+        $reviews = Review::where('book_id',$req);
+        
         $data =[
             'records' => $book,
+            'reviews' => $reviews
         ];
+       
         return view('db.bookView',$data);
+    }
+
+
+    public function reviewView(Request $req)
+    {
+        $book_id = $req->book_id;
+        $data =[
+            'book_id' => $book_id
+        ];
+        return view('db.review',$data);
     }
 
     //レビュー投稿
@@ -147,7 +162,7 @@ class DbController extends Controller
             return view('login');
         }
         $review = new Review();
-        $review->book_id = $req -> id;
+        $review->book_id = $req -> book_id;
         $review->score = $req->score;
         $review->comment = $req->comment;
         $review->account_id = session()->get('account_id');

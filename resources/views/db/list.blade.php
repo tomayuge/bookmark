@@ -7,27 +7,28 @@
     <input type="submit" value="検索" class="btn btn-info rounded-0">
 </form>
 
-<!-- <hr> -->
-<br>
-<table class="table" border="1">
-    @foreach($records as $record)
+    <hr>
 
-    <tr>
-        <td>
-            <!-- 画像と本の名前をbookViewへのリンクにしてます -->
-            <form action="/db/bookView" method="post">
+    <table class="table" border="1">
+        @foreach($records as $record)
+        
+        <tr>
+            <td>
+                <!-- 画像と本の名前をbookViewへのリンクにしてます -->
+                <form action="/db/bookView" method="post">
+                @csrf
                 <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-                <input type="image" class="btn btn-link" src="{{ $record -> img }}" alt="詳細ページ" height="100">
-            </form>
-        </td>
-        <td>
-            <form action="/db/bookView" method="post">
+                <input type="image" class="btn btn-link" src="{{ $record -> img }}" alt="詳細ページ" height="200">  
+                </form>
+            </td>
+            <td>
+                <form action="/db/bookView" method="post">
+                @csrf
                 <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-
                 <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
             </form>
         </td>
-        <td>{{ $record -> reviews -> average('score') }}</td>
+        <td><p>{{ $record -> reviews -> average('score') }}</p>{{ $record -> reviews -> count() }}件</td>
         <td>{{ $record -> writer }}</td>
         <td>{{ $record -> publisher }}</td>
         <td>{{ $record -> ISBN }}</td>
