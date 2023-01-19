@@ -2,7 +2,7 @@
 @section('title','search')
 @section('main')
 <div style="padding: 15px;">
-    <form action="/db/search" method="post">
+    <form action="/db/search" method="get">
         @csrf
         <input type="text" name="keyword">
         <input type="submit" value="検索" class="btn btn-info rounded-0">
@@ -19,11 +19,11 @@
     </form>
 
     <hr>
-
+    <p>全 {{ $allCount }} 件</p>
     <table class="table" border="1">
         <th>
         <td>書籍名</td>
-        <td>レビュー</td>
+        <td>レビュー(平均)</td>
         <td>著者名</td>
         <td>出版社名</td>
         <td>価格</td>
@@ -47,7 +47,7 @@
                     <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
                 </form>
             </td>
-            <td>{{ $record -> reviews -> average('score') }} ({{ $record -> reviews -> count() }}件)</td>
+            <td>{{ $avg = floor($record -> reviews -> average('score')*10)/10 }} ({{ $record -> reviews -> count() }}件)</td>
             <td>{{ $record -> writer }}</td>
             <td>{{ $record -> publisher }}</td>
             <td>￥{{ $record -> price }}</td>

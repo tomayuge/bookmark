@@ -52,12 +52,15 @@
     </table>
     <hr>
     <table>
+        <tr>
+            <td>ユーザ名</td><td>評価点</td><td>レビュー</td><td>投稿日</td><td>操作</td>
+        </tr>
         @foreach($reviews as $review)
         <tr>
-            <td>ユーザー名<br>{{ $review -> account -> user_name }}</td>
-            <td>評価点<br>{{ $review -> score }}</td>
+            <td>{{ $review -> account -> user_name }}</td>
+            <td>{{ $review -> score }}</td>
             <td class="col-5" style="word-wrap:break-word;">レビュー<br>{{ $review -> comment }}</td>
-            
+            <td>{{ $review -> created_at }}</td>
             <td>
                 <!-- モーダルを開くボタン -->
             <div class="container">
@@ -65,17 +68,17 @@
                 
                     <div class="row mb-5">
                         <div class="col-2">
-                            <button type="button" class="btn btn-info mb-12 rounded-0" data-toggle="modal" data-target="#editModal" data-backdrop="false">EDIT</button>
+                            <button type="button" class="btn btn-info mb-12 rounded-0" data-toggle="modal" data-target="#editModal{{ $review->id }}" data-backdrop="false">EDIT</button>
                         </div></td>
 
                         <td><div class="col-2">
-                            <button type="button" class="btn btn-dark mb-12 rounded-0" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">ERASE</button>
+                            <button type="button" class="btn btn-dark mb-12 rounded-0" data-toggle="modal" data-target="#eraseModal{{ $review->id }}" data-backdrop="false">ERASE</button>
                         </div>
                     </div>
                 </div>
             </div></td>
-            <!-- ボタンクリック後に表示される画面の内容 編集用モダール -->
-            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <!-- ボタンクリック後に表示される画面の内容 編集用モーダル -->
+            <div class="modal fade" id="editModal{{$review->id}}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                  <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -106,7 +109,7 @@
                 </div>
             </div>
             <!-- ボタンクリック後に表示される画面の内容 削除用モダール -->
-            <div class="modal fade" id="eraseModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal fade" id="eraseModal{{$review->id}}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                  <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

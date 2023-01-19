@@ -12,7 +12,7 @@
   <style>
     body {
       /* width: 500px; */
-      /* margin: 10px;  */
+      /* margin: 10px;  
       /* padding: 0;   */
       /* margin-top:    1px; */
       font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -34,7 +34,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
       <!-- <nav class="navbar navbar-expand-lg" style="height:50px; background-color: #bccddb;"> -->
       <div style="padding: 15px;">
-        <a class="navbar-brand text-white" href="#">Bookmark</a>
+        <a class="navbar-brand text-white" href="/db/index">Bookmark</a>
       </div>
       <button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
