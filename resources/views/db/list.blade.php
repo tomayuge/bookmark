@@ -11,7 +11,7 @@
 
     <table class="table" border="1">
         @foreach($records as $record)
-        
+        <th><td>書籍名</td><td>レビュー</td><td>著者名</td><td>出版社名</td><td>価格</td></th>
         <tr>
             <td>
                 <!-- 画像と本の名前をbookViewへのリンクにしてます -->
@@ -26,12 +26,35 @@
                 @csrf
                 <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
                 <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
+<<<<<<< HEAD
+                </form>
+            </td>
+            <td>{{ $record -> reviews -> average('score') }}</td>
+            <td>{{ $record -> writer }}</td>
+            <td>{{ $record -> publisher }}</td>
+            <td>{{ $record -> ISBN }}</td>
+            <td>￥{{ $record -> price }}</td>
+            <td>
+                <form action="/db/eraseData" method="post">
+                    @csrf
+                    <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
+                    <input type="submit" value="削除">
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </table>
+    <br>
+    {{ $records->links() }} 
+    <a href="/db/index">Topページに戻る</a>
+    <a href="/db/review">レビューページ</a>
+    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+=======
             </form>
         </td>
-        <td><p>{{ $record -> reviews -> average('score') }}</p>{{ $record -> reviews -> count() }}件</td>
+        <td>{{ $record -> reviews -> average('score') }} ({{ $record -> reviews -> count() }}件)</td>
         <td>{{ $record -> writer }}</td>
         <td>{{ $record -> publisher }}</td>
-        <td>{{ $record -> ISBN }}</td>
         <td>￥{{ $record -> price }}</td>
     </tr>
     @endforeach
@@ -45,4 +68,5 @@
 <!-- <a href="/db/review" class="text-dark">レビューページ</a> -->
 
 <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+>>>>>>> 5662b37d8a4748e6c533b5d7a01fae2027874768
 @endsection
