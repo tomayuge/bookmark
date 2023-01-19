@@ -34,7 +34,7 @@
         <ul class="navbar-nav">
           <li class="nav-item active">
             <!-- <a class="nav-link text-white" href="column">検索</a> -->
-            <a class="nav-link text-white" href="/db/index">検索</a>
+            <a class="nav-link text-white" href="/db/index">トップページ</a>
           </li>
           <li class="nav-item">
             <!-- <a class="nav-link text-white" href="#Flex">新規登録</a> -->
