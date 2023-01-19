@@ -26,6 +26,7 @@ Route::post('/db/store','DbController@store');//新規登録完了
 Route::post('/db/search','DbController@search');//検索用
 Route::post('/db/bookView','DbController@bookView');//bookView表示用
 Route::post('/db/review','DbController@review');//レビュー用フォーム
+Route::post('/db/reviewView','DbController@reviewView');//reviewのビュー表示とbook_idを渡す
 Route::post('/db/editReview','DbController@editReview');//レビュー編集用フォーム
 Route::get('/db/logout','DbController@logout');//ログアウト用
 Route::post('/db/eraseData','DbController@eraseData');//削除する書籍の表示

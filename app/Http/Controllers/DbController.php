@@ -126,7 +126,7 @@ class DbController extends Controller
             }
         }
 
-        $query -> paginate(4);  //※動作確認のため、4つで1ページにしてます
+        //$query -> paginate(4);  //※動作確認のため、4つで1ページにしてます
         
         $data=[
             'records' => $query,
@@ -140,11 +140,13 @@ class DbController extends Controller
     public function list()
     {
         $book = Book::all();
+        $allCount = $book -> count();
         
         $data = [
             'reviews' => Review::all(),
             //全レコードを取得するモデル内のメソッドを実行し保存
-            'records' => Book::paginate(4), //※動作確認のため、4つで1ページにしてます
+            'records' => Book::paginate(5), //※動作確認のため、5つで1ページにしてます
+            'allCount' => $allCount
         ];
         //dd($data);
         return view('db.list',$data);
@@ -154,22 +156,40 @@ class DbController extends Controller
     public function bookView(Request $req)
     {
         //受け取った値が単体か配列か検証する
-        $book = Book::find($req);
-
+        $book_id = $req->book_id;
+        $book = Book::find($book_id)->first();
+        $reviews = Review::Where('book_id','=',$book_id)->get();
+        session()->put('book_id',$book_id);
         $data =[
             'records' => $book,
+            'reviews' => $reviews
         ];
+       
         return view('db.bookView',$data);
+    }
+
+
+    public function reviewView(Request $req)
+    {
+        $book_id = $req->book_id;
+        $data =[
+            'book_id' => $book_id
+        ];
+        return view('db.review',$data);
     }
 
     //レビュー投稿
     public function review(Request $req)
     {
+        if(session()->get('account_id')===null){
+            return view('login');
+        }
+        $book_id = session()->get('book_id');
         $review = new Review();
-        $review->book_id = $req -> id;
+        $review->book_id = $book_id;
         $review->score = $req->score;
         $review->comment = $req->comment;
-        $review->account_id = $req->account_id;
+        $review->account_id = session()->get('account_id');
 
         //Booksテーブルにデータを保存
         $review->save();
@@ -180,7 +200,6 @@ class DbController extends Controller
 
     public function editReview(Request $req)
     {   
-
         $editReview = Review::find($req -> id);
         $editReview -> score = $req -> score;
         $editReview -> comment = $req -> comment;
@@ -202,13 +221,20 @@ class DbController extends Controller
     public function login(Request $req)
     {
         //アカウント情報とパスでログイン処理
-            $username = $req->user_name;
-            $pass = $req->pass;
-            session()->put('account_id',$username);
+        $username = $req->user_name;
+        $pass = $req->pass;
+        //$account = Account::all();
+        //$password = $account->pass;
+        $account = Account::where('user_name', $username)->first();
+        //dd($account);
+        //dd($account->id);
+        $password = $account->pass;
+  
 
-        //$name = account::find($req->user_name);
-        //$pass = account::find($req->pass);
-        if(($username==='akamine'&&$pass==='pass')||($username==='yuge'&&$pass==='pass')||($username==='hosomi'&&$pass==='pass')||($username==='tsumatani'&&$pass==='pass')){
+        //$name = Account::find($req->user_name);
+        //$pass = Account::find($req->pass);
+        if($password===$pass){
+            session()->put('account_id',$account->id);
             return view('/db/index');
         }else{
             session()->flash('err_msg', '入力に誤りがあります。');
