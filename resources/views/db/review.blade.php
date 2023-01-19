@@ -11,6 +11,7 @@
     <form action="/db/review" method="post">
     @csrf
     <p>本のレビューを書いてください
+        <input type="hidden" name="book_id" value="{{ $book_id }}">
         <br><textarea rows="5" id="comment" name="comment" required></textarea>
     </p>
     <p>点数を５段階で入力してください

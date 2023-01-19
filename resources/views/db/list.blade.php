@@ -16,14 +16,15 @@
             <td>
                 <!-- 画像と本の名前をbookViewへのリンクにしてます -->
                 <form action="/db/bookView" method="post">
+                @csrf
                 <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
                 <input type="image" class="btn btn-link" src="{{ $record -> img }}" alt="詳細ページ" height="200">  
                 </form>
             </td>
             <td>
                 <form action="/db/bookView" method="post">
+                @csrf
                 <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
-
                 <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
             </form>
         </td>
