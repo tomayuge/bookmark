@@ -9,7 +9,7 @@
 
         <div style="text-align:right">
             <!-- <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;"" >新規登録</a> -->
-            <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;">新規登録</a>
+            <!-- <a href="/db/insert" class="btn btn-info  rounded-circle " style="width:4rem;height:4rem;">新規登録</a> -->
 
             <!-- <br> -->
             <!-- <br> -->
@@ -67,7 +67,7 @@
     <div style="padding-right: 15px;">
         <div style="text-align:right ">
             <!-- <a href="/db/index">Topページに戻る</a> -->
-            <a href="/db/index" class="text-dark">Topページに戻る</a>
+            <a href="/db/index" class="text-dark">Topページに戻る</a><br>
             <!-- <a href="/db/review">レビューページ</a> -->
             <a href="/db/review" class="text-dark">レビューページ</a>
         </div>
