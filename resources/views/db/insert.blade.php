@@ -15,12 +15,8 @@
         <input type="text" name="isbnSearch" placeholder="13桁のISBNを入力" required>
         </div>
         <br>
-<<<<<<< HEAD
-        
-        <center><input type="submit" value="検索" class="btn btn-info rounded-0 col-4 d-grid"></center>
-=======
         <center><input type="submit" value="検索" class="btn btn-info rounded-0 d-grid" ></center>
->>>>>>> 38901ca56fb28b651b80744d61841fcdd9bfad59
+        
 </div>
 <br><br>
 

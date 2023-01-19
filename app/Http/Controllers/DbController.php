@@ -96,25 +96,36 @@ class DbController extends Controller
             $array_words = preg_split( '/\s+/ui' , $keyword , -1 ,PREG_SPLIT_NO_EMPTY); //スペース区切りでキーワードを配列に格納
             foreach($array_words as $word){
                 $escape_word = addcslashes($word,'\\_%'); //エスケープ処理
-                $query = $query->Where('book_name','LIKE',"%$keyword%")->orWhere('writer','LIKE',"%$keyword%")->orWhere('publisher','LIKE',"%$keyword%")->get();
+
+                //クエリビルダの結果を取得。複数カラムで検索しているので重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
+                //distinctいるかはテストで確認
+                $query = $query->Where('book_name','LIKE',"%$keyword%")->orWhere('writer','LIKE',"%$keyword%")->orWhere('publisher','LIKE',"%$keyword%") 
+                            ->distinct()-> select('book_name') -> get();
             }
         }
 
-        //クエリビルダの結果を取得。複数カラムで検索しているので重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
-        //distinctいるかはテストで確認
-        $records = $query -> distinct() -> get(); 
-        $records -> paginate(5);  //※一旦5ページにしてます
-        
-        //レビュー点数の平均点を出す
-        $score = $records -> review -> score / count($records);
+        $query -> paginate(4);  //※動作確認のため、4つで1ページにしてます
         
         $data=[
-            'records' => $records,
-            'score' => $score,
-            'count' => $records->count(),
+            'records' => $query,
+            'count' => $query -> count(),
             'keyword' => $keyword
         ];
         return view('db.search',$data);
+    }
+
+    //全レコードを取得するモデル内のメソッドを実行
+    public function list()
+    {
+        $book = Book::all();
+        
+        $data = [
+            'reviews' => Review::all(),
+            //全レコードを取得するモデル内のメソッドを実行し保存
+            'records' => Book::paginate(4), //※動作確認のため、4つで1ページにしてます
+        ];
+        //dd($data);
+        return view('db.list',$data);
     }
 
     //searchページから詳細ページに飛ぶアクションメソッド
@@ -122,17 +133,9 @@ class DbController extends Controller
     {
         //受け取った値が単体か配列か検証する
         $book = Book::find($req);
-        $reviews = $book -> review ->get();
-        $avgScore = $book -> review -> score / count($reviews);
-        $score = $book -> review ->score->get();
-        if($score===null){
-            $score=0;
-        }
+
         $data =[
-            'record' => $book,
-            'reviews' => $reviews,
-            'avgScore' => $avgScore,
-            'score' => $score
+            'records' => $book,
         ];
         return view('db.bookView',$data);
     }
@@ -156,25 +159,24 @@ class DbController extends Controller
         return view('db.review');
     }
 
-    //全レコードを取得するモデル内のメソッドを実行
-    public function list()
-    {
+    public function editReview(Request $req)
+    {   
+
+        $editReview = Review::find($req -> id);
+        $editReview -> score = $req -> score;
+        $editReview -> comment = $req -> comment;
+
+        //Booksテーブルにデータを保存
+        $editReview->save();
+
         $book = Book::all();
-        
-        //$score = $book -> review -> score;
-        $score = 0;
-        
-        if($score===null){
-            $score=0;
-        }
+
         $data = [
-            'reviews' => Review::all(),
-            //全レコードを取得するモデル内のメソッドを実行し保存
-            'records' => Book::paginate(2),
-            'score' => $score
+            'records' => $book
         ];
-        //dd($data);
-        return view('db.list',$data);
+
+        session()->flash('ok_msg', 'editted');
+        return view('db.bookView',$data);
     }
 
     //ログイン処理
@@ -194,6 +196,11 @@ class DbController extends Controller
             //\Session::flash('err_msg', '入力に誤りがあります。');
             return redirect('/');
         }
-        
     }   
+
+    //ログアウト処理
+    public function logout()
+    {
+        return view('login');
+    }
 }

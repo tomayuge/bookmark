@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('review');
+    return view('login');
 });
 
 Route::post('/db/login','DbController@login');//ログイン用
@@ -26,3 +26,5 @@ Route::post('/db/store','DbController@store');//新規登録
 Route::post('/db/search','DbController@search');//検索用
 Route::post('/db/bookView','DbController@bookView');//bookView表示用
 Route::post('/db/review','DbController@review');//レビュー用フォーム
+Route::post('/db/editReview','DbController@editReview');//レビュー編集用フォーム
+Route::get('/db/logout','DbController@logout');//ログアウト用

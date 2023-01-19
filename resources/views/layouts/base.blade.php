@@ -37,6 +37,9 @@
           <li class="nav-item">
             <a class="nav-link text-white" href="#Flex">新規登録</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/db/logout">ログアウト</a>
+          </li>
           <!-- <li class="nav-item">
               <a class="nav-link text-white" href="#tab">tab</a>
             </li>
