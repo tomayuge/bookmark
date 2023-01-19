@@ -1,8 +1,11 @@
 @extends('layouts.base')
 @section('title','search')
 @section('main')
-<a href="/db/index">Topページに戻る</a>
+
+<div style="padding: 15px;">
+<a href="/db/index" >Topページに戻る</a>
 <br><br>
+
 <table>
     <tr><td rowspan="6"><img src="{{ $records -> img }}" height="400"></td></tr>
     <tr><td>書籍名<br>{{ $records -> book_name }}</td></tr>
@@ -102,7 +105,7 @@
         </tr>
     @endforeach
 </table>
-    
+</div>
 
 
 @endsection

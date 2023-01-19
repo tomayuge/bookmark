@@ -1,7 +1,8 @@
 @extends('layouts.base')
 @section('title','search')
 @section('main')
-    <h1>レビュー画面</h1>
+<div style="padding: 15px;" >
+    <h1 >レビュー画面</h1>
     @if (session('ok_msg'))
 <div style="text-align:center;" p class="text-danger" text-align:center>
     {{ session('ok_msg') }}
@@ -25,4 +26,5 @@
     <input type="submit" value="登録"> 
     </form>
     <br><a href="/db/list">戻る</a>
+</div>
 @endsection
