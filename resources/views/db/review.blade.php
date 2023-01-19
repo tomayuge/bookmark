@@ -25,5 +25,5 @@
     <!-- <input type="hidden" name="account_id" value= account_id }}" readonly> -->
     <input type="submit" value="登録"> 
     </form>
-    <br><a href="/">戻る</a>
+    <br><a href="/db/list">戻る</a>
 @endsection
