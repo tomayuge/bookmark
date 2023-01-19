@@ -205,13 +205,14 @@ class DbController extends Controller
         //$password = $account->pass;
         $account = Account::where('user_name', $username)->first();
         //dd($account);
+        //dd($account->id);
         $password = $account->pass;
   
 
         //$name = Account::find($req->user_name);
         //$pass = Account::find($req->pass);
         if($password===$pass){
-            session()->put('account_id',$username);
+            session()->put('account_id',$account->id);
             return view('/db/index');
         }else{
             session()->flash('err_msg', '入力に誤りがあります。');
