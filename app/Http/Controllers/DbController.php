@@ -109,13 +109,13 @@ class DbController extends Controller
         return view('db.eraseData',$data);
     }
 
-    public function delete(Request $req)
+    public function bookDelete(Request $req)
     {
         //dd($req);
         $bookId=session()->get('bookId');
         $book = Book::find($bookId);
         $book->delete();
-        return view('db.delete');
+        return view('db.bookDelete');
     }
 
 
