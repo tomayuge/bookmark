@@ -47,30 +47,27 @@
         </tr>
     </table>
     <hr>
-    <p>Reviews</p>
     <table>
         @foreach($reviews as $review)
-        <tr>
-            <td>{{ $review -> account -> user_name }}</td>
-            <td>{{ $review -> score }}</td>
-            <td>{{ $review -> comment }}</td>
-            
-            <td>
+            <tr><td>{{ $review -> id }}</td>
+            <td>ユーザー名{{ $review -> account -> user_name }}</td>
+            <td>評価点{{ $review -> score }}</td>
+            <td>レビュー{{ $review -> comment }}</td>
                 <!-- モーダルを開くボタン -->
-            <div class="container">
-                <div class="row my-3">
+            <td><div class="container">
+                    <div class="row my-3">
                 
-                    <div class="row mb-5">
-                        <div class="col-2">
-                            <button type="button" class="btn btn-info mb-12 rounded-0" data-toggle="modal" data-target="#editModal" data-backdrop="false">EDIT</button>
-                        </div></td>
+                        <div class="row mb-5">
+                            <td><div class="col-2">
+                            <button type="button" class="btn btn-info mb-12 rounded-0" data-toggle="modal" data-target="#editModal" data-backdrop="false">編集</button>
+                            </div></td>
 
-                        <td><div class="col-2">
-                            <button type="button" class="btn btn-dark mb-12 rounded-0" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">ERASE</button>
+                            <td><div class="col-2">
+                            <button type="button" class="btn btn-dark mb-12 rounded-0" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">削除</button>
+                            </div></td>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div></td></tr>
             <!-- ボタンクリック後に表示される画面の内容 編集用モダール -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                  <div class="modal-dialog">
@@ -103,14 +100,14 @@
                 </div>
             </div>
             <!-- ボタンクリック後に表示される画面の内容 削除用モダール -->
-            <div class="modal fade" id="eraseModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <td><div class="modal fade" id="eraseModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                  <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <!-- ここからformタグ -->
                         <form action="/db/editReview" method="post">
                         @csrf
-                            <h4　class="modal-title" id="myModalLabel">レビュー削除</h4>
+                            <h4 class="modal-title" id="myModalLabel">レビュー削除</h4>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" value="{{ $review -> id }}">
@@ -121,14 +118,13 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
-                            <input type="submit" class="btn btn-danger" value="ERASE">
+                            <input type="submit" class="btn btn-danger" value="削除">
                         </form>
                         </div>
                     </div>
                 </div>
+
             </div>
-            </td>
-        </tr>
     @endforeach
 </table>
 </div>
