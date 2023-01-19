@@ -5,10 +5,10 @@
 <div style="text-align:center;" text-align:center>
 
     <h2>書籍の新規登録</h2>
-    <p>13桁のISBNコードを入力してください。</ｐ>
+    <p>13桁のISBNコードを入力してください。</p>
         <!-- <form action="/db/confirm" method="post"> -->
     <br>
-        <form action="/db/confirm" method="post" class="needs-validation col-3 mx-auto" novalidate action="">
+        <form action="/db/confirm" method="post" class="needs-validation col-3 mx-auto" >
 
     
     @csrf

@@ -29,6 +29,7 @@
 <br><br><br>
 <div style="text-align:center" >
     <p>登録しますか？</p>
+    <button type="button" onClick="history.back()" class="btn btn-info rounded-0  type">戻る</button>
     <input type="submit" class="btn btn-info rounded-0  type" value="登録">
 </div>
 

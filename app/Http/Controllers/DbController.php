@@ -86,6 +86,28 @@ class DbController extends Controller
         return view('db.store',$data);
     }
 
+    public function eraseData(Request $req)
+    {
+        $id=$req->book_id;
+        $data=[
+            'record'=>Book::find($id),
+            'id'=>$id
+        ];
+        //dd($id);
+        session()->put('bookId',$id);
+        return view('db.eraseData',$data);
+    }
+
+    public function delete(Request $req)
+    {
+        //dd($req);
+        $bookId=session()->get('bookId');
+        $book = Book::find($bookId);
+        $book->delete();
+        return view('db.delete');
+    }
+
+
     //検索フォームのデータを取得し、該当する既存のデータを取得するアクションメソッド
     //複数キーワードにも対応
     public function search(Request $req)
