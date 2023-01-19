@@ -2,26 +2,30 @@
 @section('title','Bookmark')
 @section('main')
 
-<div style="text-align:center;"  text-align:center>
+<div style="text-align:center;" text-align:center>
 
     <h2>書籍の新規登録</h2>
     <p>13桁のISBNコードを入力してください。</ｐ>
-    <form action="/db/confirm" method="post">
-       <br>
+        <!-- <form action="/db/confirm" method="post"> -->
+    <br>
+        <form action="/db/confirm" method="post" class="needs-validation col-3 mx-auto" novalidate action=">
+
+    
     @csrf
-        ISBN
-        <br>
-        
-        <input type="text" name="isbnSearch" placeholder="13桁のISBNを入力" required>
+        <div style=margin-left:-280px text-align:center>
+            ISBN
         </div>
-        <br>
-        <center><input type="submit" value="検索" class="btn btn-info rounded-0 d-grid" ></center>
-        
+<input class="col-8 mb-10" type="text" name="isbnSearch" placeholder="13桁のISBNを入力" required>
 </div>
+<br><br>
+<center><input type="submit" value="検索" class="btn btn-info rounded-0 d-grid"></center>
+
+</div>
+</form>
 <br><br>
 
 <div style="text-align:right">
-<a href="/db/index">Topページに戻る</a>
+    <a href="/db/index">Topページに戻る</a>
 </div>
 </form>
 
