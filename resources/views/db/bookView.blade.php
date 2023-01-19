@@ -23,15 +23,83 @@
 <hr>
 <p>Reviews</p>
 <table>
-    @foreach($reviews as $record)
-        <tr>
-            <td>{{ $record -> review -> account -> user_name }}</td>
-            <td>{{ $record -> review -> score }} </td>
-            <td>{{ $record -> review -> comment }}</td>
-
+    @foreach($reviews as $review)
+    <tr>
+            <td>{{ $review -> account -> user_name }}</td>
+            <td>
+                         {{ $review -> score }}</td>
+            <td>{{ $review -> comment }}</td>
+            
+            <td>
+                <!-- モーダルを開くボタン -->
+            <div class="container">
+                <div class="row my-3">
+                
+                    <div class="row mb-5">
+                        <div class="col-2">
+                            <button type="button" class="btn btn-primary mb-12" data-toggle="modal" data-target="#editModal" data-backdrop="false">EDIT</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-danger mb-12" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">ERASEく</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ボタンクリック後に表示される画面の内容 編集用モダール -->
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                 <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- ここからformタグ -->
+                        <form action="/db/editReview" method="post">
+                        @csrf
+                            <h4><class="modal-title" id="myModalLabel">EDIT REVIEW</h4></h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="id" value="{{ $review -> id }}">
+                            <input type="textarea" name="comment" value="{{ $review -> comment }}">
+                            <p>Please enter a score of 1 to 5.
+                                <br><input type="number" max="5" id="score" name="score" required>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
+                            <input type="submit" class="btn btn-success" value="EDIT">
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ボタンクリック後に表示される画面の内容 削除用モダール -->
+            <div class="modal fade" id="eraseModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                 <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- ここからformタグ -->
+                        <form action="/db/editReview" method="post">
+                        @csrf
+                            <h4>class="modal-title" id="myModalLabel">EDIT REVIEW</h4></h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="id" value="{{ $review -> id }}">
+                            <p>{{ $review -> comment }}</p>
+                            <p>
+                                <br><input type="number" max="5" id="score" name="score" required>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
+                            <input type="submit" class="btn btn-danger" value="ERASE">
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </td>
         </tr>
     @endforeach
 </table>
+    
 
 
 @endsection
