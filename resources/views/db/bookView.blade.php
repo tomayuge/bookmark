@@ -64,13 +64,13 @@
 
                         <div class="row mb-5">
                             <div class="col-2">
-                                <button type="button" class="btn btn-primary mb-12" data-toggle="modal" data-target="#editModal" data-backdrop="false">EDIT</button>
+                                <button type="button" class="btn btn-info rounded-0 mb-12" data-toggle="modal" data-target="#editModal" data-backdrop="false">EDIT</button>
                             </div>
             </td>
 
             <td>
                 <div class="col-2">
-                    <button type="button" class="btn btn-danger mb-12" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">ERASE</button>
+                    <button type="button" class="btn btn-dark rounded-0 mb-12" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">ERASE</button>
                 </div>
 </div>
 </div>
