@@ -23,7 +23,7 @@ Route::get('/db/list','DbController@list');//全件表示用のビューを呼�
 Route::get('/db/insert','DbController@insert');//新規登録用フォーム(ISBN入力)
 Route::post('/db/confirm','DbController@confirm');//新規登録用フォーム(書籍確認)
 Route::post('/db/store','DbController@store');//新規登録完了
-Route::post('/db/search','DbController@search');//検索用
+Route::get('/db/search','DbController@search');//検索用
 Route::post('/db/bookView','DbController@bookView');//bookView表示用
 Route::post('/db/review','DbController@review');//レビュー用フォーム
 Route::post('/db/reviewView','DbController@reviewView');//reviewのビュー表示とbook_idを渡す

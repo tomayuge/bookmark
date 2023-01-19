@@ -14,13 +14,13 @@
         
         <!-- <br> -->
         <!-- <br> -->
-        <a href="/db/list" class="btn btn-info  rounded-circle" style="width:4rem;height:4rem;"">全件表示</a>
+        <a href="/db/list" class="btn btn-info  rounded-circle" style="width:4rem;height:4rem;">全件表示</a>
     </ul>
     </div>
 
 
 <div style="text-align:center;"  text-align:center>
-    <form class= novalidate action="/db/search" method="post">
+    <form class= novalidate action="/db/search" method="get">
         @csrf
         <br><br>
         <h2>Search</h2><br>

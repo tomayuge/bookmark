@@ -114,30 +114,25 @@ class DbController extends Controller
     {
         $keyword = $req -> keyword;
         $query = Book::query(); //Bookモデルのクエリビルダを開始
-        dd($query);
+        
         if(isset($keyword)){
             $array_words = preg_split( '/\s+/ui' , $keyword , -1 ,PREG_SPLIT_NO_EMPTY); //スペース区切りでキーワードを配列に格納
             foreach($array_words as $word){
-                
+                //dd($word);
                 $escape_word = addcslashes($word,'\\_%'); //エスケープ処理
 
                 //クエリビルダの結果を取得。複数カラムで検索しているので重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
                 //distinctいるかはテストで確認
-                $query = Book::query()
-                        ->Where('book_name','LIKE',"%$word%")
-                        ->orWhere('writer','LIKE',"%$word%")
-                        ->orWhere('publisher','LIKE',"%$word%") 
-                        -> get();
-                            dd($query);
-            }
+                $query = Book::where('book_name','LIKE',"%$word%") ->paginate(4);
+             }
+             
         }
-
-        //$query -> paginate(4);  //※動作確認のため、4つで1ページにしてます
-        
+        $this -> $req -> session() -> put('keyword',$keyword);                
         $data=[
-            'records' => $query,
+            'records' => $query ,
             'count' => $query -> count(),
-            'keyword' => $keyword
+            'keyword' => $keyword,
+            'this' => $this
         ];
         return view('db.search',$data);
     }

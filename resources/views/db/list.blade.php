@@ -11,9 +11,9 @@
     <hr>
 
     <table class="table" border="1">
-    <th><td>書籍名</td><td>レビュー</td><td>著者名</td><td>出版社名</td><td>価格</td></th>
+    <th><td>書籍名</td><td>レビュー</td><td>著者名</td><td>出版社名</td><td>価格</td><td>操作</td></th>
         @foreach($records as $record)
-        <th><td>書籍名</td><td>レビュー</td><td>著者名</td><td>出版社名</td><td>価格</td></th>
+        
         <tr>
             <td>
                 <!-- 画像と本の名前をbookViewへのリンクにしてます -->
@@ -52,6 +52,5 @@
 <a href="/db/review">レビューページ</a>
 <!-- <a href="/db/review" class="text-dark">レビューページ</a> -->
 
-<script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
->>>>>>> 5662b37d8a4748e6c533b5d7a01fae2027874768
+
 @endsection
