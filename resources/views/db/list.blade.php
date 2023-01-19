@@ -11,7 +11,7 @@
 
     <table class="table" border="1">
         @foreach($records as $record)
-        
+        <th><td>書籍名</td><td>レビュー</td><td>著者名</td><td>出版社名</td><td>価格</td></th>
         <tr>
             <td>
                 <!-- 画像と本の名前をbookViewへのリンクにしてます -->
@@ -28,10 +28,9 @@
                 <input type="submit" class="btn btn-link" value="{{ $record -> book_name }}">
             </form>
         </td>
-        <td><p>{{ $record -> reviews -> average('score') }}</p>{{ $record -> reviews -> count() }}件</td>
+        <td>{{ $record -> reviews -> average('score') }} ({{ $record -> reviews -> count() }}件)</td>
         <td>{{ $record -> writer }}</td>
         <td>{{ $record -> publisher }}</td>
-        <td>{{ $record -> ISBN }}</td>
         <td>￥{{ $record -> price }}</td>
     </tr>
     @endforeach

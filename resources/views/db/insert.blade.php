@@ -8,7 +8,7 @@
     <p>13桁のISBNコードを入力してください。</ｐ>
         <!-- <form action="/db/confirm" method="post"> -->
     <br>
-        <form action="/db/confirm" method="post" class="needs-validation col-3 mx-auto" novalidate action=">
+        <form action="/db/confirm" method="post" class="needs-validation col-3 mx-auto" novalidate action="">
 
     
     @csrf

@@ -92,15 +92,17 @@ class DbController extends Controller
     {
         $keyword = $req -> keyword;
         $query = Book::query(); //Bookモデルのクエリビルダを開始
+        dd($query);
         if(isset($keyword)){
             $array_words = preg_split( '/\s+/ui' , $keyword , -1 ,PREG_SPLIT_NO_EMPTY); //スペース区切りでキーワードを配列に格納
             foreach($array_words as $word){
+                
                 $escape_word = addcslashes($word,'\\_%'); //エスケープ処理
 
                 //クエリビルダの結果を取得。複数カラムで検索しているので重複がある場合はdistinctではじく。($keywordが無い場合は全て取得)
                 //distinctいるかはテストで確認
-                $query = $query->Where('book_name','LIKE',"%$keyword%")->orWhere('writer','LIKE',"%$keyword%")->orWhere('publisher','LIKE',"%$keyword%") 
-                            ->distinct()-> select('book_name') -> get();
+                $query = Book::Where('book_name','LIKE',"%$word%")->orWhere('writer','LIKE',"%$word%")->orWhere('publisher','LIKE',"%$word%") -> get();
+                            dd($query);
             }
         }
 

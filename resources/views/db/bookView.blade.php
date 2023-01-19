@@ -4,11 +4,11 @@
 <a href="/db/index">Topページに戻る</a>
 <table>
     <tr><td rowspan="6"><img src="{{ $records -> img }}" height="400"></td></tr>
-    <tr><td>{{ $records -> book_name }}</td></tr>
-    <tr><td>{{ $records -> reviews -> average('score') }}</td></tr>
-    <tr><td>{{ $records -> writer }}</td></tr>
-    <tr><td>{{ $records -> publisher }}</td></tr>
-    <tr><td>￥{{ $records -> price }}</td></tr>
+    <tr><td>書籍名<br>{{ $records -> book_name }}</td></tr>
+    <tr><td>平均点数<br>{{ $records -> reviews -> average('score') }}({{ $reviews -> count() }})</td></tr>
+    <tr><td>著者名<br>{{ $records -> writer }}</td></tr>
+    <tr><td>出版社<br>{{ $records -> publisher }}</td></tr>
+    <tr><td>価格<br>￥{{ $records -> price }}</td></tr>
     <tr>
         <td colspan="2">
             <!-- reviewページに飛ぶボタンを作る -->
@@ -38,9 +38,10 @@
                     <div class="row mb-5">
                         <div class="col-2">
                             <button type="button" class="btn btn-primary mb-12" data-toggle="modal" data-target="#editModal" data-backdrop="false">EDIT</button>
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-danger mb-12" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">ERASEく</button>
+                        </div></td>
+
+                        <td><div class="col-2">
+                            <button type="button" class="btn btn-danger mb-12" data-toggle="modal" data-target="#eraseModal" data-backdrop="false">ERASE</button>
                         </div>
                     </div>
                 </div>
