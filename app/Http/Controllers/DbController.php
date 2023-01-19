@@ -140,11 +140,14 @@ class DbController extends Controller
     //レビュー投稿
     public function review(Request $req)
     {
+        if(session()->get('account_id')===null){
+            return view('login');
+        }
         $review = new Review();
         $review->book_id = $req -> id;
         $review->score = $req->score;
         $review->comment = $req->comment;
-        $review->account_id = $req->account_id;
+        $review->account_id = session()->get('account_id');
 
         //Booksテーブルにデータを保存
         $review->save();
