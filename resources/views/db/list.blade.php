@@ -33,6 +33,13 @@
         <td>{{ $record -> writer }}</td>
         <td>{{ $record -> publisher }}</td>
         <td>￥{{ $record -> price }}</td>
+        <td>
+                <form action="/db/eraseData" method="post">
+                    @csrf
+                    <input type="hidden" name="book_id" value="{{ $record -> id }}" readonly>
+                    <input type="submit" value="削除">
+                </form>
+            </td>
     </tr>
     @endforeach
 </table>
