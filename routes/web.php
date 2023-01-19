@@ -31,6 +31,6 @@ Route::post('/db/reviewView','DbController@reviewView');//reviewのビュー表�
 Route::post('/db/editReview','DbController@editReview');//レビュー編集用フォーム
 Route::get('/db/logout','DbController@logout');//ログアウト用
 Route::post('/db/eraseData','DbController@eraseData');//削除する書籍の表示
-Route::post('/db/delete','DbController@delete');//登録書籍の削除
+Route::post('/db/bookDelete','DbController@bookDelete');//登録書籍の削除
 
 
