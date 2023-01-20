@@ -5,7 +5,7 @@
 <div style="padding: 15px;">
     <form action="/db/search" method="get">
         @csrf
-        <input type="text" name="keyword" value="{{ $keyword }}">
+        <input type="text" name="keyword" value="{{ $keyword }}" required>
         <input type="submit" value="検索" class="btn btn-info rounded-0">
     </form>
 
