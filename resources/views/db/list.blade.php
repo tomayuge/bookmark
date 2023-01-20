@@ -20,6 +20,7 @@
 
     <hr>
     <p>全 {{ $allCount }} 件</p>
+    {{ $records->links() }}
     <table class="table" border="1">
         <th>
         <td>書籍名</td>

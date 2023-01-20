@@ -29,7 +29,7 @@
             <td>書籍名<br>{{ $records -> book_name }}</td>
         </tr>
         <tr>
-            <td>平均点数<br>{{ $records -> reviews -> average('score') }}({{ $reviews -> count() }})</td>
+            <td>レビュー(件数)<br>{{ $records -> reviews -> average('score') }}({{ $reviews -> count() }})</td>
         </tr>
         <tr>
             <td>著者名<br>{{ $records -> writer }}</td>
