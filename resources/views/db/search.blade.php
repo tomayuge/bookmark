@@ -12,11 +12,11 @@
     <hr>
 
     <p>[ {{ $keyword }} ]の検索結果 {{ $count }}件</p>
-
+    {{ $records -> appends($params) -> links() }}
     <table class="table">
         <th>
         <td>書籍名</td>
-        <td>レビュー(平均)</td>
+        <td>レビュー(件数)</td>
         <td>著者名</td>
         <td>出版社名</td>
         <td>価格</td>
@@ -41,11 +41,7 @@
                 </form>
             </td>
             <td>
-                <div class="rateYo" id="rating" 
-                data-rateyo-rating=""
-                data-rateyo-num-stars="5"
-                data-rateyo-score="{{ $avg = floor($record -> reviews -> average('score')*10)/10 }}">
-                </div> 
+                {{ $avg = floor($record -> reviews -> average('score')*10)/10 }}
                 
                 ({{ $record -> reviews -> count() }}件)
             </td>
@@ -66,13 +62,6 @@
     <br>
     <a href="/db/index">Topページに戻る</a>
 </div>
-<script>
-    $(function){
-        $("#rateYo").rateYo({
-            rating:{{ $avg }},
-            halfStar:true
-        });
-    };
-</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 @endsection

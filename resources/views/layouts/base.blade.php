@@ -36,6 +36,7 @@
       <!-- <nav class="navbar navbar-expand-lg" style="height:50px; background-color: #bccddb;"> -->
       <div style="padding: 15px;">
         <a class="navbar-brand text-white" href="/db/index">Bookmark</a>
+        <a class="navbar-brand text-white" href="/db/index"><img src="{{asset('/img/bkm1.JPG')}}" alt="チェック"></a>
       </div>
       <button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
