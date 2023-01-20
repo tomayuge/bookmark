@@ -15,6 +15,7 @@
 
     <br>
     <br>
+   
     @if (session('ok_msg'))
     <div style="text-align:center;" p class="text-danger" text-align:center>
         {{ session('ok_msg') }}

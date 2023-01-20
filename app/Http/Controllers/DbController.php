@@ -165,6 +165,8 @@ class DbController extends Controller
     //searchページから詳細ページに飛ぶアクションメソッド
     public function bookView(Request $req)
     {
+        session()->forget('review_msg');
+        session()->forget('ok_msg');
         //受け取った値が単体か配列か検証する
         $book_id = $req->book_id;
         
@@ -193,29 +195,62 @@ class DbController extends Controller
     //レビュー投稿
     public function review(Request $req)
     {
-        if(session()->get('account_id')===null){
+        session()->forget('review_msg');
+        $review = new Review();
+        $account_id = session()->get('account_id');
+        $book_id = session()->get('book_id');
+        if($account_id===null){
             return view('login');
         }
-        $book_id = session()->get('book_id');
-        $review = new Review();
-        $review->book_id = $book_id;
-        $review->score = $req->score;
-        $review->comment = $req->comment;
-        $review->account_id = session()->get('account_id');
-        $review->save();
+
         $book = Book::Where('id','=',$book_id)->first();
         $reviews = Review::Where('book_id','=',$book_id)->get();
-        //Booksテーブルにデータを保存
-         $data =[
-            'records' => $book,
-            'reviews' => $reviews
-        ];
-        session()->flash('ok_msg', '登録しました。');
-        return view('db.bookView',$data);
+        //dd($reviews);
+        $judge=Review::where('book_id','=',$book_id)
+                    ->where('account_id','=',$account_id)->first();
+
+        if($judge===null){
+            $review->book_id = $book_id;
+            $review->score = $req->score;
+            $review->comment = $req->comment;
+            $review->account_id = session()->get('account_id');
+            $review->save();
+            $book = Book::Where('id','=',$book_id)->first();
+            $reviews = Review::Where('book_id','=',$book_id)->get();
+            //Booksテーブルにデータを保存
+             $data =[
+                'records' => $book,
+                'reviews' => $reviews
+            ];
+            session()->flash('review_msg', '登録しました。');
+            return view('db.bookView',$data);
+        }else{
+            $editReview = Review::find($judge -> id);
+            $editReview -> score = $req -> score;
+            $editReview -> comment = $req -> comment;
+    
+            //reviewテーブルにデータを保存
+            $editReview->save();
+
+            $book = Book::Where('id','=',$book_id)->first();
+            $reviews = Review::Where('book_id','=',$book_id)->get();
+            //Booksテーブルにデータを保存
+             $data =[
+                'records' => $book,
+                'reviews' => $reviews
+            ];
+            session()->flash('review_msg', 'レビューを更新しました。');
+            return view('db.bookView',$data);
+    }
     }
 
     public function editReview(Request $req)
     {   
+        session()->forget('ok_msg');
+        $pass=$req->pass;
+        if($pass){
+
+        }
         $book_id = session()->get('book_id');
         $editReview = Review::find($req -> id);
         $editReview -> score = $req -> score;
@@ -240,7 +275,20 @@ class DbController extends Controller
 
     public function deleteReview(Request $req)
     {   
+        session()->forget('ok_msg');
         $book_id = session()->get('book_id');
+        $password = session()->get('password');
+        if(!($req->pass===$password)){
+            $book = Book::where('id','=',session()->get('book_id'))->first();
+            $reviews = Review::Where('book_id','=',$book_id)->get();
+            $data = [
+                'reviews' => $reviews,
+                'records' => $book
+            ];
+            session()->flash('ok_msg', 'パスワードが違います。');
+            return view('db.bookView',$data);
+        }
+       
         $id=$req->id;//レビューのid取得
 
         $review = Review::find($id);
@@ -273,6 +321,7 @@ class DbController extends Controller
         //$pass = Account::find($req->pass);
         if($password===$pass){
             session()->put('account_id',$account->id);
+            session()->put('password',$account->pass);
             return view('/db/index');
         }else{
             session()->flash('err_msg', '入力に誤りがあります。');

@@ -3,11 +3,6 @@
 @section('main')
 <div style="padding: 15px;">
     <h1>レビュー画面</h1>
-    @if (session('ok_msg'))
-    <div style="text-align:center;" p class="text-danger" text-align:center>
-        {{ session('ok_msg') }}
-    </div>
-    @endif
     <br>
 
 
