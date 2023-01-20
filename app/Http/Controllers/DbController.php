@@ -296,38 +296,16 @@ class DbController extends Controller
 
     public function editReview(Request $req)
     {   
-        session()->forget('ok_msg');
-        $pass=$req->pass;
-        if($pass){
-
-        }
-        $book_id = session()->get('book_id');
-        $editReview = Review::find($req -> id);
-        $editReview -> score = $req -> score;
-        $editReview -> comment = $req -> comment;
-
-        //reviewテーブルにデータを保存
-        $editReview->save();
-
-        
-        $book = Book::where('id','=',session()->get('book_id'))->first();
-        $reviews = Review::Where('book_id','=',$book_id)->get();
-        $data = [
-            'reviews' => $reviews,
-            'records' => $book
-        ];
-
-        
-
-        session()->flash('ok_msg', 'レビューを編集しました。');
-        return view('db.bookView',$data);
-    }
-
-    public function deleteReview(Request $req)
-    {   
+        $id=$req->id;//レビューのid取得
         session()->forget('ok_msg');
         $book_id = session()->get('book_id');
         $password = session()->get('password');
+        //$username = session()->get('username');
+        $accountid = session()->get('account_id');
+        //$account = Account::where('id', $username)->first();
+        $judge=Review::where('book_id','=',$book_id)
+        ->where('id','=',$id)->first();
+    
         if(!($req->pass===$password)){
             $book = Book::where('id','=',session()->get('book_id'))->first();
             $reviews = Review::Where('book_id','=',$book_id)->get();
@@ -338,10 +316,57 @@ class DbController extends Controller
             session()->flash('ok_msg', 'パスワードが違います。');
             return view('db.bookView',$data);
         }
-       
-        $id=$req->id;//レビューのid取得
+        if($judge->account_id===$accountid){
+            $editReview = Review::find($id);
+            $editReview -> score = $req -> score;
+            $editReview -> comment = $req -> comment;
 
-        $review = Review::find($id);
+        //reviewテーブルにデータを保存
+            $editReview->save();
+            $book = Book::where('id','=',session()->get('book_id'))->first();
+            $reviews = Review::Where('book_id','=',$book_id)->get();
+            $data = [
+                'reviews' => $reviews,
+                'records' => $book
+            ];
+            session()->flash('ok_msg', 'レビューを編集しました。');
+            return view('db.bookView',$data);
+        }else{
+            $book = Book::where('id','=',session()->get('book_id'))->first();
+            $reviews = Review::Where('book_id','=',$book_id)->get();
+            $data = [
+                'reviews' => $reviews,
+                'records' => $book
+            ];
+            session()->flash('ok_msg', '他のユーザーからは編集出来ません。');
+            return view('db.bookView',$data);
+        }
+    }
+
+    public function deleteReview(Request $req)
+    {   
+        $id=$req->id;//レビューのid取得
+        session()->forget('ok_msg');
+        $book_id = session()->get('book_id');
+        $password = session()->get('password');
+        //$username = session()->get('username');
+        $accountid = session()->get('account_id');
+        //$account = Account::where('id', $username)->first();
+        $judge=Review::where('book_id','=',$book_id)
+        ->where('id','=',$id)->first();
+    
+        if(!($req->pass===$password)){
+            $book = Book::where('id','=',session()->get('book_id'))->first();
+            $reviews = Review::Where('book_id','=',$book_id)->get();
+            $data = [
+                'reviews' => $reviews,
+                'records' => $book
+            ];
+            session()->flash('ok_msg', 'パスワードが違います。');
+            return view('db.bookView',$data);
+        }
+        if($judge->account_id===$accountid){
+            $review = Review::find($id);
         $review->delete();
         $book = Book::where('id','=',session()->get('book_id'))->first();
         $reviews = Review::Where('book_id','=',$book_id)->get();
@@ -351,6 +376,16 @@ class DbController extends Controller
         ];
         session()->flash('ok_msg', 'レビューを削除しました。');
         return view('db.bookView',$data);
+        }else{
+            $book = Book::where('id','=',session()->get('book_id'))->first();
+            $reviews = Review::Where('book_id','=',$book_id)->get();
+            $data = [
+                'reviews' => $reviews,
+                'records' => $book
+            ];
+            session()->flash('ok_msg', '他のユーザーからは削除出来ません。');
+            return view('db.bookView',$data);
+        }
     }
 
     //ログイン処理
@@ -370,6 +405,7 @@ class DbController extends Controller
         //$name = Account::find($req->user_name);
         //$pass = Account::find($req->pass);
         if($password===$pass){
+            session()->put('username',$account->user_name);
             session()->put('account_id',$account->id);
             session()->put('password',$account->pass);
             return view('/db/index');

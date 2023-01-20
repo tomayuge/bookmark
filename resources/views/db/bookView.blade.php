@@ -93,6 +93,9 @@
 
                                 <input type="hidden" name="id" value="{{ $review -> id }}">
                                 <input type="textarea" name="comment" value="{{ $review -> comment }}">
+                                <p>パスワード
+                                <br><input type="password" id="pass" name="pass" required>
+                                </p>
                                 <br><br>
                                 評価編集 <br>
                                     <input type="radio" id="score" name="score" value="1" >1
