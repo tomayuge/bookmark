@@ -24,7 +24,7 @@
     <table class="table" border="1">
         <th>
         <td>書籍名</td>
-        <td>レビュー(平均)</td>
+        <td>平均点(件数)</td>
         <td>著者名</td>
         <td>出版社名</td>
         <td>価格</td>
