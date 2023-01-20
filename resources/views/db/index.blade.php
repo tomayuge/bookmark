@@ -30,7 +30,7 @@
         @csrf
         <br><br>
         <h2>Search</h2><br>
-        <input type="text" name="keyword" placeholder="キーワードを入力" >
+        <input type="text" name="keyword" placeholder="キーワードを入力" required>
         <input type="submit" value="検索" class="btn btn-info rounded-0">
         <br>
 

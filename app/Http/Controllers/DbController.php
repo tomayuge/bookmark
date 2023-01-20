@@ -21,13 +21,53 @@ class DbController extends Controller
         return view('db.insert');
     }
 
+    //ISBNチェック画面
+    public function checkIsbn(Request $req)
+    {
+        $searchIsbn = $req->isbnSearch;
+        $registared = Book::where('isbn',$searchIsbn)->count();
+        //dd($registared);
+        if(!isset($searchIsbn) || strlen($searchIsbn)!==13)
+        {
+            $msg="13桁のISBNコードを入力してください";
+            $data =[
+                'msg' => $msg
+            ];
+            return redirect("/db/insert",$data);//13桁以外は入力画面に強制移動
+        }
+        if($registared>=1){
+            $msg = "既に登録済みです";
+            $data =[
+                'msg' => $msg
+            ];
+            return redirect("/db/insert",$data);//登録済の場合は強制移動
+        }
+
+        return view('db.checkIsbn');
+    }
+
     //確認ページ
     public function confirm(Request $req)
     {
-        if(mb_strlen($req->isbnSearch)!==13){
-            return redirect("db/insert");
+        $isbn = $req->isbnSearch;
+        $registared = Book::where('isbn',$isbn)->count();
+        //dd($registared);
+        if(!isset($isbn) || mb_strlen($isbn)!==13)
+        {
+            $msg="13桁のISBNコードを入力してください";
+            $data =[
+                'msg' => $msg
+            ];
+            return view("/db/insert",$data);//13桁以外は入力画面に強制移動
         }
-        $isbn = $req -> isbnSearch;
+        if($registared>=1){
+            $msg = "既に登録済みです";
+            $data =[
+                'msg' => $msg
+            ];
+            return view("/db/insert",$data);//登録済の場合は強制移動
+        }
+
         $url = 'https://api.openbd.jp/v1/get?isbn=';
         $searchData = $url."{$isbn}";
        
@@ -48,7 +88,16 @@ class DbController extends Controller
         $book_name=$items[0]->summary->title;
         $writer=$items[0]->summary->author;
         $publisher=$items[0]->summary->publisher;
-        $price=$items[0]->onix->ProductSupply->SupplyDetail->Price[0]->PriceAmount;
+        if(in_array('SupplyDetail',$items)){
+            $price=$items[0]->onix->ProductSupply->SupplyDetail->Price[0]->PriceAmount;
+        }else{
+            $price=""; 
+        }
+        if(in_array('cover',$items)){
+            $img=$items[0]->summary->cover;
+        }else{
+            $img=""; 
+        }
         $img=$items[0]->summary->cover;
 
         $data=[
@@ -141,7 +190,8 @@ class DbController extends Controller
             'records' => $query->paginate(5) ,
             'count' => $query -> count(),
             'keyword' => $keyword,
-            'this' => $this
+            'this' => $this,
+            'params' => array('_token'=>session()->token(),'keyword'=>$keyword)
         ];
         return view('db.search',$data);
     }

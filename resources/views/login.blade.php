@@ -16,8 +16,8 @@
 <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
 <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
 <meta name="theme-color" content="#7952b3">
+<center><img class="text-center py-3" src="{{ asset('img/bkm20.png') }}" alt="ロゴ"></center>
 
-<h2 class="text-center py-3">ログイン</h2>
 </p>
 <!-- <br> -->
 
