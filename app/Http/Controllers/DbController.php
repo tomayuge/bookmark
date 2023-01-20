@@ -24,7 +24,7 @@ class DbController extends Controller
     //確認ページ
     public function confirm(Request $req)
     {
-        if(mb_strlen($req->searchIsbn)!==13){
+        if(mb_strlen($req->isbnSearch)!==13){
             return redirect("db/insert");
         }
         $isbn = $req -> isbnSearch;
