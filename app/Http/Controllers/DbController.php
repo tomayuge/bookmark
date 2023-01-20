@@ -190,7 +190,8 @@ class DbController extends Controller
             'records' => $query->paginate(5) ,
             'count' => $query -> count(),
             'keyword' => $keyword,
-            'this' => $this
+            'this' => $this,
+            'params' => array('_token'=>session()->token(),'keyword'=>$keyword)
         ];
         return view('db.search',$data);
     }

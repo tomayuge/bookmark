@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('book_name');
             $table->string('writer');
             $table->string('publisher');
-            $table->integer('price');
+            $table->string('price');
             $table->string('img');
         
             $table->timestamps();
