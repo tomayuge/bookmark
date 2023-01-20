@@ -20,7 +20,7 @@
     <p>13桁のISBNコードを入力してください。</p>
     <!-- <form action="/db/confirm" method="post"> -->
     <br>
-    <form action="/db/checkIsbn" method="post" class="needs-validation col-3 mx-auto">
+    <form action="/db/confirm" method="post" class="needs-validation col-3 mx-auto">
 
 
         @csrf

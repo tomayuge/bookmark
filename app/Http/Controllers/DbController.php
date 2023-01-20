@@ -49,9 +49,12 @@ class DbController extends Controller
     //確認ページ
     public function confirm(Request $req)
     {
+        if(mb_strlen($req->isbnSearch)!==13){
+            return redirect("db/insert");
+        }
         $isbn = $req -> isbnSearch;
-        $Url = 'https://api.openbd.jp/v1/get?isbn=';
-        $searchData = $Url."{$isbn}";
+        $url = 'https://api.openbd.jp/v1/get?isbn=';
+        $searchData = $url."{$isbn}";
        
         //プロキシ設定
         $proxy = array(
@@ -224,16 +227,21 @@ class DbController extends Controller
         $review->score = $req->score;
         $review->comment = $req->comment;
         $review->account_id = session()->get('account_id');
-
-        //Booksテーブルにデータを保存
         $review->save();
-
+        $book = Book::Where('id','=',$book_id)->first();
+        $reviews = Review::Where('book_id','=',$book_id)->get();
+        //Booksテーブルにデータを保存
+         $data =[
+            'records' => $book,
+            'reviews' => $reviews
+        ];
         session()->flash('ok_msg', '登録しました。');
-        return view('db.review');
+        return view('db.bookView',$data);
     }
 
     public function editReview(Request $req)
     {   
+        $book_id = session()->get('book_id');
         $editReview = Review::find($req -> id);
         $editReview -> score = $req -> score;
         $editReview -> comment = $req -> comment;
@@ -241,33 +249,35 @@ class DbController extends Controller
         //reviewテーブルにデータを保存
         $editReview->save();
 
-
+        
         $book = Book::where('id','=',session()->get('book_id'))->first();
-
+        $reviews = Review::Where('book_id','=',$book_id)->get();
         $data = [
-            'reviews' => Review::all(),
+            'reviews' => $reviews,
             'records' => $book
         ];
 
         
 
         session()->flash('ok_msg', 'レビューを編集しました。');
-        return view('index');
+        return view('db.bookView',$data);
     }
 
     public function deleteReview(Request $req)
     {   
+        $book_id = session()->get('book_id');
         $id=$req->id;//レビューのid取得
 
         $review = Review::find($id);
         $review->delete();
         $book = Book::where('id','=',session()->get('book_id'))->first();
+        $reviews = Review::Where('book_id','=',$book_id)->get();
         $data = [
-            'reviews' => Review::all(),
+            'reviews' => $reviews,
             'records' => $book
         ];
         session()->flash('ok_msg', 'レビューを削除しました。');
-        return view('db.index');
+        return view('db.bookView',$data);
     }
 
     //ログイン処理

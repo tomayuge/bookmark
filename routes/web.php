@@ -21,7 +21,6 @@ Route::post('/db/login','DbController@login');//ログイン用
 Route::get('/db/index','DbController@index');//ログイン後に表示するindexページ
 Route::get('/db/list','DbController@list');//全件表示用のビューを呼び出す
 Route::get('/db/insert','DbController@insert');//新規登録用フォーム(ISBN入力)
-Route::post('/db/checkIsbn','DbController@checkIsbn');//ISBNチェック画面
 Route::post('/db/confirm','DbController@confirm');//新規登録用フォーム(書籍確認)
 Route::post('/db/store','DbController@store');//新規登録完了
 Route::get('/db/search','DbController@search');//検索用
