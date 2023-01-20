@@ -52,7 +52,7 @@ class DbController extends Controller
         $isbn = $req->isbnSearch;
         $registared = Book::where('isbn',$isbn)->count();
         //dd($registared);
-        if(!isset($isbn) || strlen($isbn)!==13)
+        if(!isset($isbn) || mb_strlen($isbn)!==13)
         {
             $msg="13桁のISBNコードを入力してください";
             $data =[
