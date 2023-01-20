@@ -88,7 +88,11 @@ class DbController extends Controller
         $book_name=$items[0]->summary->title;
         $writer=$items[0]->summary->author;
         $publisher=$items[0]->summary->publisher;
-        $price=$items[0]->onix->ProductSupply->SupplyDetail->Price[0]->PriceAmount;
+        if(in_array('SupplyDetail',$items)){
+            $price=$items[0]->onix->ProductSupply->SupplyDetail->Price[0]->PriceAmount;
+        }else{
+            $price=""; 
+        }
         $img=$items[0]->summary->cover;
 
         $data=[
