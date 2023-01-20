@@ -93,6 +93,11 @@ class DbController extends Controller
         }else{
             $price=""; 
         }
+        if(in_array('cover',$items)){
+            $img=$items[0]->summary->cover;
+        }else{
+            $img=""; 
+        }
         $img=$items[0]->summary->cover;
 
         $data=[
