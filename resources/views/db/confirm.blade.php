@@ -19,7 +19,7 @@
             <br><br><td><input type="text" name="book_name" value="{{ $book_name }}" readonly></td>
             <td><input type="text" name="writer" value="{{ $writer }}" readonly></td>
             <td><input type="text" name="publisher" value="{{ $publisher }}" readonly></td>
-            <td><input type="text" name="price" value="{{ $price }}" readonly></td>
+            <td><input type="text" name="price" value="{{ $price }}"></td>
             <td><input type="hidden" name="img" value="{{ $img }}" readonly>
             <img src="{{ $img }}"></td>
         </tr>
