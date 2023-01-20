@@ -62,7 +62,7 @@
         </tr>
         @endforeach
     </table>
-    {{ $records->links() }}
+    {{ $records -> appends($params) -> links() }}
     <br>
     <a href="/db/index">Topページに戻る</a>
 </div>
