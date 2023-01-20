@@ -25,7 +25,6 @@
 </table>
 </div>
     <br>
-    <a href="/db/bookView"  class="btn btn-info rounded-0">書籍のページを見る</a>
     <a href="/db/insert"  class="btn btn-info rounded-0">続けて新規登録する</a>
     <a href="/db/index"  class="btn btn-info rounded-0">Topページに戻る</a>
 @endsection

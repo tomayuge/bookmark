@@ -21,36 +21,15 @@ class DbController extends Controller
         return view('db.insert');
     }
 
-    //ISBNチェック画面
-    public function checkIsbn(Request $req)
-    {
-        $searchIsbn = $req->searchIsbn;
-        $registared = Book::find($searchIsbn)->count();
-        if(!isset($searchIsbn) || strlen($searchIsbn)!==13)
-        {
-            $msg="13桁のISBNコードを入力してください";
-            $data =[
-                'msg' => $msg
-            ];
-            return redirect("/db/insert",$data);//13桁以外は入力画面に強制移動
-        }
-        if($registared>=1){
-            $msg = "既に登録済みです";
-            $data =[
-                'msg' => $msg
-            ];
-            return redirect("/db/insert",$data);//登録済の場合は強制移動
-        }
-
-        return view('db.checkIsbn');
-    }
-
     //確認ページ
     public function confirm(Request $req)
     {
+        if(mb_strlen($req->isbnSearch)!==13){
+            return redirect("db/insert");
+        }
         $isbn = $req -> isbnSearch;
-        $Url = 'https://api.openbd.jp/v1/get?isbn=';
-        $searchData = $Url."{$isbn}";
+        $url = 'https://api.openbd.jp/v1/get?isbn=';
+        $searchData = $url."{$isbn}";
        
         //プロキシ設定
         $proxy = array(
