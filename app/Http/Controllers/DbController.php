@@ -24,8 +24,9 @@ class DbController extends Controller
     //ISBNチェック画面
     public function checkIsbn(Request $req)
     {
-        $searchIsbn = $req->searchIsbn;
-        $registared = Book::find($searchIsbn)->count();
+        $searchIsbn = $req->isbnSearch;
+        $registared = Book::where('isbn',$searchIsbn)->count();
+        //dd($registared);
         if(!isset($searchIsbn) || strlen($searchIsbn)!==13)
         {
             $msg="13桁のISBNコードを入力してください";
