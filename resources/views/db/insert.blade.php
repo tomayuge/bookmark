@@ -34,9 +34,9 @@
 
 </div>
 </form>
-@isset($ms)
-<p>{{ $msg }}</p>
-@endif
+@isset($msg)
+<center><p>{{ $msg }}</p></center>
+@endisset
 <br>
 <br>
 
